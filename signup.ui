@@ -25,6 +25,9 @@
    <property name="text">
     <string/>
    </property>
+   <property name="pixmap">
+    <pixmap resource="rsources.qrc">:/img2/img/signup1.png</pixmap>
+   </property>
   </widget>
   <widget class="QPushButton" name="RegisterButton">
    <property name="geometry">
@@ -146,8 +149,26 @@
      </rect>
     </property>
    </widget>
+   <widget class="QLabel" name="Lerror">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>200</y>
+      <width>171</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="rsources.qrc"/>
+ </resources>
  <connections/>
 </ui>

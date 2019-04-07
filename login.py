@@ -7,6 +7,8 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import os
+import sys
 
 class Ui_Login(object):
     def setupUi(self, Login):
@@ -36,9 +38,15 @@ class Ui_Login(object):
         self.Tpass.setGeometry(QtCore.QRect(86, 92, 131, 20))
         self.Tpass.setEchoMode(QtWidgets.QLineEdit.Password)
         self.Tpass.setObjectName("Tpass")
+        self.Lerror = QtWidgets.QLabel(self.groupBox)
+        self.Lerror.setGeometry(QtCore.QRect(40, 140, 150, 16))
+        self.Lerror.setObjectName("Lerror")
+        self.Lerror.setStyleSheet("QLabel {color:red;}")
         self.LPic = QtWidgets.QLabel(self.centralWidget)
         self.LPic.setGeometry(QtCore.QRect(20, 50, 121, 151))
         self.LPic.setText("")
+        self.LPic.setPixmap(QtGui.QPixmap("img/login.png"))
+        self.LPic.setScaledContents(True)
         self.LPic.setObjectName("LPic")
         Login.setCentralWidget(self.centralWidget)
         self.menuBar = QtWidgets.QMenuBar(Login)
@@ -54,6 +62,10 @@ class Ui_Login(object):
 
         self.retranslateUi(Login)
         QtCore.QMetaObject.connectSlotsByName(Login)
+        ### func 
+        self.loginButton.clicked.connect(self.loginpressed)
+        self.Signup.clicked.connect(self.signuppressed)
+	###	exit
 
     def retranslateUi(self, Login):
         _translate = QtCore.QCoreApplication.translate
@@ -63,6 +75,21 @@ class Ui_Login(object):
         self.Signup.setText(_translate("Login", "Sign Up"))
         self.LUname.setText(_translate("Login", "User Name"))
         self.Lpass.setText(_translate("Login", "Password  "))
+        self.Lerror.setText(_translate("Login", "<html><head/><body><p><br/></p></body></html>"))
+        ##my func	
+    def loginpressed(self):
+        if(self.TUname.text()==self.Tpass.text()):
+        	self.Lerror.setText("Redirect page is not added")
+        else:
+        	self.Lerror.setText("Invalid Username or password")
+             
+    def signuppressed(self):
+        
+        os.system('python signup.py')          
+       
+        ##sys.exit() not best way
+
+     	##exit
 
 
 if __name__ == "__main__":

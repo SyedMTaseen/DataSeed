@@ -15,6 +15,8 @@ class Ui_SignUp(object):
         self.Lpic = QtWidgets.QLabel(SignUp)
         self.Lpic.setGeometry(QtCore.QRect(300, 10, 91, 71))
         self.Lpic.setText("")
+        self.Lpic.setPixmap(QtGui.QPixmap("img/signup1.png"))
+        self.Lpic.setScaledContents(True)
         self.Lpic.setObjectName("Lpic")
         self.RegisterButton = QtWidgets.QPushButton(SignUp)
         self.RegisterButton.setGeometry(QtCore.QRect(290, 250, 75, 23))
@@ -47,9 +49,17 @@ class Ui_SignUp(object):
         self.TUname = QtWidgets.QLineEdit(self.SignUp_2)
         self.TUname.setGeometry(QtCore.QRect(90, 60, 171, 20))
         self.TUname.setObjectName("TUname")
+        self.Lerror = QtWidgets.QLabel(self.SignUp_2)
+        self.Lerror.setGeometry(QtCore.QRect(60, 200, 171, 16))
+        self.Lerror.setAlignment(QtCore.Qt.AlignCenter)
+        self.Lerror.setStyleSheet("QLabel {color:red;}")
+        self.Lerror.setObjectName("Lerror")
 
         self.retranslateUi(SignUp)
         QtCore.QMetaObject.connectSlotsByName(SignUp)
+        ###my func
+        self.RegisterButton.clicked.connect(self.registerpressed)
+        ##exit 
 
     def retranslateUi(self, SignUp):
         _translate = QtCore.QCoreApplication.translate
@@ -60,7 +70,19 @@ class Ui_SignUp(object):
         self.LEmail.setText(_translate("SignUp", "Email"))
         self.LPassword.setText(_translate("SignUp", "Password"))
         self.Lphone.setText(_translate("SignUp", "Phone No."))
+        self.Lerror.setText(_translate("SignUp", " "))
+        ### my func 
+    def registerpressed(self):
 
+        if(self.TUname.text()==""):
+            self.Lerror.setText("UserName is required!")
+        elif(self.Tpass.text()==""):
+            self.Lerror.setText("Password is required!")
+        elif(self.Temail.text()==""):
+            self.Lerror.setText("Email is required!")
+        else:
+            self.Lerror.setText("Register Successfull")
+        ### exit        
 
 if __name__ == "__main__":
     import sys
