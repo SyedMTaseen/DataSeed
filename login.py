@@ -79,7 +79,10 @@ class Ui_Login(object):
         ##my func	
     def loginpressed(self):
         if(self.TUname.text()==self.Tpass.text()):
-        	self.Lerror.setText("Redirect page is not added")
+            self.Lerror.setText("Redirect page is not added")
+            os.system('python homepage.py')
+            
+
         else:
         	self.Lerror.setText("Invalid Username or password")
              
@@ -87,7 +90,7 @@ class Ui_Login(object):
         
         os.system('python signup.py')          
        
-        ##sys.exit() not best way
+         #sys.exit()# not best way
 
      	##exit
 
