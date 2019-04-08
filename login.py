@@ -80,7 +80,7 @@ class Ui_Login(object):
     def loginpressed(self):
         if(self.TUname.text()==self.Tpass.text()):
             self.Lerror.setText("Redirect page is not added")
-            os.system('python homepage.py')
+            os.system('python mainpage.py')
             
 
         else:
