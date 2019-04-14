@@ -8,6 +8,18 @@ import sys
 from PyQt5 import QtCore, QtGui, QtWidgets,uic,Qt
 from PyQt5.QtWidgets import QLayout, QSizePolicy,QApplication, QWidget, QListWidget, QVBoxLayout, QLabel, QPushButton, QListWidgetItem,     QHBoxLayout
 
+import pymongo
+
+data_client = pymongo.MongoClient("mongodb://localhost/")
+ds_db = data_client["dataseed_db"]
+ds_user = ds_db["user"]
+ds_datasets = ds_db["dataset"]
+# curr_datasets = ds_datasets.find_many()
+
+for x in ds_datasets.find():
+    print(x)
+
+curr_user = ds_user.find_one()
 
 # In[2]:
 

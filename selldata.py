@@ -8,7 +8,14 @@ import sys
 from PyQt5 import QtCore, QtGui, QtWidgets,uic,Qt
 from PyQt5.QtWidgets import QLayout, QSizePolicy,QApplication, QWidget, QListWidget, QVBoxLayout, QLabel, QPushButton, QListWidgetItem,     QHBoxLayout
 
-
+import pymongo
+import datetime
+data_client = pymongo.MongoClient("mongodb://localhost/")
+ds_db = data_client["dataseed_db"]
+ds_user = ds_db["user"]
+curr_user = ds_user.find_one()
+# print(curr_user['_id'])
+ds_dataset = ds_db["dataset"]
 # In[2]:
 
 
@@ -50,7 +57,18 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             self.status_field.setText("Detail is missing!")    
         else:
             self.status_field.setText("Successfully Submited!")
-        
+            curr_dataset = {
+                "uploaded_by": curr_user["_id"], 
+                "full_description": str2,
+                "category":self.category_field.currentText(),
+                "short_description":str1,
+                "data_location": str3,
+                "data_size":"5 GB", 
+                "status":"For Sale",
+                "cost":str4, 
+                "uploaded_on_date_time":datetime.datetime.now()}
+            ds_dataset.insert_one(curr_dataset)
+            self.status_field.setText("Successfully Submited!")
   
         
         

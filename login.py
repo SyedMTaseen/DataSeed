@@ -10,6 +10,23 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import os
 import sys
 
+
+import pymongo
+
+data_client = pymongo.MongoClient("mongodb://localhost/")
+ds_db = data_client["dataseed_db"]
+ds_user = ds_db["user"]
+
+# x = ds_user.insert_one({_id:123,"fullname":"DataSeed User","username":"ds", "password":"ds"})
+curr_user = ds_user.find_one()
+list(curr_user)
+# print(curr_user['username'])
+# print(curr_user['password'])
+
+
+
+
+
 class Ui_Login(object):
     def setupUi(self, Login):
         Login.setObjectName("Login")
@@ -78,13 +95,13 @@ class Ui_Login(object):
         self.Lerror.setText(_translate("Login", "<html><head/><body><p><br/></p></body></html>"))
         ##my func	
     def loginpressed(self):
-        if(self.TUname.text()==self.Tpass.text()):
+        if(self.TUname.text()== curr_user["username"] and self.Tpass.text() == curr_user["password"]):
             self.Lerror.setText("Redirect page is not added")
             os.system('python mainpage.py')
-            
-
         else:
         	self.Lerror.setText("Invalid Username or password")
+
+       
              
     def signuppressed(self):
         
