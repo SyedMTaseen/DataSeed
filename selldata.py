@@ -44,7 +44,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.category_field.currentIndexChanged.connect(self.selectionchange)
 
     def selectionchange(self,i):
-        strr+= self.category_field.currentText();
+        strr = self.category_field.currentText();
         self.status_field.setText(self.category_field.currentText())
         
     def CalculateTax(self):

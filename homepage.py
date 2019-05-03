@@ -6,9 +6,17 @@
 
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets,uic,Qt
-from PyQt5.QtWidgets import QLayout, QSizePolicy,QApplication, QWidget, QListWidget, QVBoxLayout, QLabel, QPushButton, QListWidgetItem,     QHBoxLayout
-
+from PyQt5.QtWidgets import QLayout, QSizePolicy,QApplication, QWidget, QListWidget, QVBoxLayout, QLabel, QPushButton, QListWidgetItem, QHBoxLayout
 import pymongo
+import datetime
+
+
+# In[2]:
+
+
+
+item_list =list()
+
 
 data_client = pymongo.MongoClient("mongodb://localhost/")
 ds_db = data_client["dataseed_db"]
@@ -17,11 +25,14 @@ ds_datasets = ds_db["dataset"]
 # curr_datasets = ds_datasets.find_many()
 
 for x in ds_datasets.find():
-    print(x)
+    print(type(x))
+    item_list.append(x)
 
 curr_user = ds_user.find_one()
 
-# In[2]:
+
+# In[ ]:
+
 
 
 qtCreatorFile = "homepage.ui" # Enter file here.
@@ -29,59 +40,77 @@ qtCreatorFile = "homepage.ui" # Enter file here.
 Ui_MainWindow, QtBaseClass = uic.loadUiType(qtCreatorFile)
 
 
-# In[3]:
+
+filterItem = ['All item','Medical','Movies','General']
 
 
-ItemList = ['Movie Data','Stock Data','Phone Data']
-filterItem = ['Date','Name']
-import datetime
-
-dummy_dataset = [{
-    "uploaded_by": 123, 
-    "full_description": "This dataset refers to data of genes and etc.",
-    "category":"Medical",
-    "short_description":"This data is nice med.",
-    "data_location": r"C:\Users\SAAD PC\Documents\DSci Project\diabetes.csv",
-    "data_size":"5 GB", 
-    "status":"For Sale",
-    "cost":30500, 
-    "uploaded_on_date_time":datetime.datetime.now()}]
+# dummy_dataset = [{
+#     "uploaded_by": 123, 
+#     "full_description": "This dataset refers to data of genes and etc.",
+#     "category":"Medical",
+#     "short_description":"This data is nice med.",
+#     "data_location": r"C:\Users\SAAD PC\Documents\DSci Project\diabetes.csv",
+#     "data_size":"5 GB", 
+#     "status":"For Sale",
+#     "cost":30500, 
+#     "uploaded_on_date_time":datetime.datetime.now()}]
 
 
-strr=''
-for item in dummy_dataset:
-    for key,value in item.items():
-        strr += key + ' ' + str(value) + '\n'
-
-print(strr)
-#ItemList.append(strr)
-dummy_dataset[0]['cost']
 
 
-# In[4]:
 
+original_list_item = item_list.copy()
 
 
 class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
+    
     def __init__(self):
         QtWidgets.QMainWindow.__init__(self)
         Ui_MainWindow.__init__(self)
         self.setupUi(self)
-        self.clickme.clicked.connect(self.CalculateTax)
-        self.searchBox.setText('serch me')
+        self.clickme.clicked.connect(self.searchItem)
+        self.searchBox.setText('')
 #         self.ItemListView.addItems(ItemList)
         self.filterBox.addItems(filterItem)
         self.filterBox.currentIndexChanged.connect(self.selectionchange)
 #         self.label.setText('DataSeed-Homepage')
 #         self.ItemListView.setStyleSheet( "QListWidget::item {margin-bottom:10px}")
         self.renderList()
-
         
-    def CalculateTax(self):
+
+    def Search_Query(self,query):
+        search_list =[]
+        search_query = query
+        global item_list
+        for x in item_list:
+            temp = list(x.values())
+            for y in temp:
+#                 print(y)
+                try:
+                    if search_query in y:
+                        search_list.append(x)
+#                         print('breaking after \n',x)
+                        break
+                except:
+                    pass
+
+        search_list
+        item_list=[]
+        item_list = search_list.copy()
+
+    
+    def searchItem(self):
+        global original_list_item
+        global item_list
+        item_list = original_list_item.copy()
         print('check')
+        query = self.searchBox.text()
+        self.Search_Query(query)
+        self.renderList()
         
     def renderList(self):
-        for i in range(0,10):
+        self.ItemListView.clear()
+        for i in range(0,len(item_list)):
             self.renderListItem(i)
         
 
@@ -90,12 +119,12 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             layout.setSizeConstraint(QLayout.SetMinimumSize);
             
             item = QListWidgetItem(self.ItemListView)
-            label = QLabel(str(i+1)+ ") " + dummy_dataset[0]['short_description'] + "\n" + "Uploaded By: " + str(dummy_dataset[0]['uploaded_by']))
+            label = QLabel(str(i+1)+ ") " + item_list[i]['short_description'] + "\n" + "Uploaded By: " + str(item_list[i]['uploaded_by']))
             label.setStyleSheet("height:fit-content;font-size:12pt;font-style: normal;font-weight:100;");
           #  label.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Minimum)
             label.setWordWrap(True);
             
-            label2 = QLabel("Data Size: " + dummy_dataset[0]['data_size'] + '\nStatus: ' + dummy_dataset[0]['status'])
+            label2 = QLabel("Data Size: " + item_list[i]['data_size'] + '\nStatus: ' + item_list[i]['status'])
             label2.setStyleSheet("height:fit-content;font-size:12pt;text-align:right;");
 #             label2.setStyleSheet("color: white; background: red;,text-align:right;");
             label2.setAlignment(QtCore.Qt.AlignCenter)
@@ -110,7 +139,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             layout.addWidget(label2)
             
             widget = QWidget()
-            widget.setStyleSheet("height:fit-content;,width:'100%'");
+            widget.setStyleSheet("height:fit-content;,width:100%");
             widget.setLayout(layout);
             
             item.setSizeHint(layout.sizeHint())
@@ -127,9 +156,18 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
     
         
     def selectionchange(self,i):
-        self.searchBox.setText(self.filterBox.currentText())
+        global original_list_item
+        global item_list
+        strr = self.filterBox.currentText()
+#         print(strr)
+        item_list = original_list_item.copy()
+        if strr != "All item":
+            self.Search_Query(strr)
+        
+        self.renderList()
         
 if __name__ == "__main__":
+    x=12
     app = QtWidgets.QApplication(sys.argv)
     window = MyApp()
     window.show()
