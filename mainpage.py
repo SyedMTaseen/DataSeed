@@ -18,7 +18,7 @@ qtCreatorFile = "main page.ui" # Enter file here.
 Ui_MainWindow, QtBaseClass = uic.loadUiType(qtCreatorFile)
 
 
-# In[ ]:
+# In[3]:
 
 
 class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -28,15 +28,21 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.purchase_btn.clicked.connect(self.CalculateTax)
         self.sell_btn.clicked.connect(self.CalculateTax2)
+        self.view_req_btn.clicked.connect(self.CalculateTax3)
+        self.my_req_btn.clicked.connect(self.CalculateTax4)
      
 
         
     def CalculateTax(self):
-        
         os.system('python homepage.py')
     def CalculateTax2(self):
-        
         os.system('python selldata.py')
+    def CalculateTax3(self):
+#         print("cll")
+        os.system('python ./globalreq/main.py')
+    def CalculateTax4(self):
+#         print("cll")
+        os.system('python ./individualreq/main.py')
         
   
         

@@ -31,7 +31,25 @@ for x in ds_datasets.find():
 curr_user = ds_user.find_one()
 
 
-# In[ ]:
+# In[3]:
+
+
+qtCreatorFile_pur = "purchase_window.ui" # Enter file here.
+
+Ui_MainWindow_pur, QtBaseClass = uic.loadUiType(qtCreatorFile_pur)
+
+class PurchaseWindow(QtWidgets.QMainWindow, Ui_MainWindow_pur):
+    def __init__(self):
+        QtWidgets.QMainWindow.__init__(self)
+        Ui_MainWindow.__init__(self)
+        self.setupUi(self)
+#         self.purchase_btn.clicked.connect(self.CalculateTax)
+#         self.sell_btn.clicked.connect(self.CalculateTax2)
+     
+        
+
+
+# In[4]:
 
 
 
@@ -76,8 +94,32 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
 #         self.label.setText('DataSeed-Homepage')
 #         self.ItemListView.setStyleSheet( "QListWidget::item {margin-bottom:10px}")
         self.renderList()
+        self.ItemListView.itemDoubleClicked.connect(self.itemclicked)
+        self.purchase_window = uic.loadUi("purchase_window.ui")
         
-
+    def itemclicked(self,iteem):
+        print("item clicked: ",iteem)
+        
+        i=0;
+        while i<len(item_list):
+            if(self.ItemListView.item(i)== iteem):
+                break
+            i=i+1
+        
+        self.PurchaseWindowOpen(i)
+#         mainpg.hide()
+#         pg1.show()
+#         pg1.requestButton.hide()
+#         pg1.Ltitle.setText("Saad DB se "+str(i)+"th entry ka show kara do")
+    def PurchaseWindowOpen(self,item_index):
+        
+        print(item_list[item_index])
+        self.purchase_window.show()
+        self.purchase_window.label1.setText(item_list[item_index]['short_description'])
+        self.purchase_window.label2.setText(item_list[item_index]['cost'])
+       
+        
+        
     def Search_Query(self,query):
         search_list =[]
         search_query = query

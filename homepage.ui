@@ -128,14 +128,21 @@
    <widget class="QPushButton" name="clickme">
     <property name="geometry">
      <rect>
-      <x>340</x>
-      <y>340</y>
+      <x>320</x>
+      <y>330</y>
       <width>75</width>
       <height>23</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+      <underline>false</underline>
+     </font>
+    </property>
     <property name="text">
-     <string>Click ME</string>
+     <string>Serach</string>
     </property>
    </widget>
    <widget class="QComboBox" name="filterBox">
