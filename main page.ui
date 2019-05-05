@@ -17,7 +17,7 @@
    <widget class="QPushButton" name="purchase_btn">
     <property name="geometry">
      <rect>
-      <x>210</x>
+      <x>30</x>
       <y>120</y>
       <width>251</width>
       <height>71</height>
@@ -35,8 +35,8 @@
    <widget class="QPushButton" name="sell_btn">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>240</y>
+      <x>30</x>
+      <y>230</y>
       <width>251</width>
       <height>71</height>
      </rect>
@@ -48,6 +48,73 @@
     </property>
     <property name="text">
      <string>Sell Dataset</string>
+    </property>
+   </widget>
+   <widget class="Line" name="line">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>70</y>
+      <width>20</width>
+      <height>321</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="view_req_btn">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>70</y>
+      <width>251</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>View Data Request</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="post_req_btn">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>180</y>
+      <width>251</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Post Data Request</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="my_req_btn">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>280</y>
+      <width>251</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>My Request</string>
     </property>
    </widget>
   </widget>
