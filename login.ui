@@ -128,7 +128,20 @@
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="rsources.qrc">:/login/img/login.png</pixmap>
+     <pixmap>:/login/img/login.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="forgetButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>220</y>
+      <width>121</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Forget Password?</string>
     </property>
    </widget>
   </widget>

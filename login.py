@@ -6,7 +6,7 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets,uic
 import os
 import sys
 
@@ -30,6 +30,7 @@ list(curr_user)
 class Ui_Login(object):
     def setupUi(self, Login):
         Login.setObjectName("Login")
+        self.signup=uic.loadUi("signup.ui")
         Login.resize(400, 300)
         self.centralWidget = QtWidgets.QWidget(Login)
         self.centralWidget.setObjectName("centralWidget")
@@ -105,7 +106,8 @@ class Ui_Login(object):
              
     def signuppressed(self):
         
-        os.system('python signup.py')          
+        self.hide()
+        self.signup.show()          
        
          #sys.exit()# not best way
 
