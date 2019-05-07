@@ -38,6 +38,9 @@
      <height>23</height>
     </rect>
    </property>
+   <property name="tabletTracking">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Register</string>
    </property>
@@ -62,6 +65,9 @@
       <width>171</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="tabletTracking">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QLabel" name="LUname">
@@ -98,6 +104,9 @@
       <width>171</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="tabletTracking">
+     <bool>true</bool>
     </property>
     <property name="echoMode">
      <enum>QLineEdit::Password</enum>
@@ -138,6 +147,9 @@
       <height>20</height>
      </rect>
     </property>
+    <property name="tabletTracking">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QLineEdit" name="TUname">
     <property name="geometry">
@@ -147,6 +159,9 @@
       <width>171</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="tabletTracking">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QLabel" name="label">
@@ -210,6 +225,9 @@
       <height>20</height>
      </rect>
     </property>
+    <property name="tabletTracking">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QLineEdit" name="Tques">
     <property name="geometry">
@@ -219,6 +237,9 @@
       <width>171</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="tabletTracking">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QLineEdit" name="Torg">
@@ -230,6 +251,9 @@
       <height>20</height>
      </rect>
     </property>
+    <property name="tabletTracking">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QLineEdit" name="Tans">
     <property name="geometry">
@@ -239,6 +263,9 @@
       <width>171</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="tabletTracking">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>
@@ -252,13 +279,24 @@
     </rect>
    </property>
    <property name="text">
-    <string> </string>
+    <string/>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>TUname</tabstop>
+  <tabstop>Temail</tabstop>
+  <tabstop>Tpass</tabstop>
+  <tabstop>Tphoneno</tabstop>
+  <tabstop>Toccu</tabstop>
+  <tabstop>Torg</tabstop>
+  <tabstop>Tques</tabstop>
+  <tabstop>Tans</tabstop>
+  <tabstop>RegisterButton</tabstop>
+ </tabstops>
  <resources>
   <include location="rsources.qrc"/>
  </resources>

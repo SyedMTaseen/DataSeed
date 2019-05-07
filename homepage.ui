@@ -144,6 +144,9 @@
     <property name="text">
      <string>Serach</string>
     </property>
+    <property name="autoDefault">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QComboBox" name="filterBox">
     <property name="geometry">
@@ -270,9 +273,31 @@
      <bool>false</bool>
     </property>
    </widget>
+   <widget class="QLabel" name="SearchresultLabel">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>110</y>
+      <width>151</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <tabstops>
+  <tabstop>filterBox</tabstop>
+  <tabstop>searchBox</tabstop>
+  <tabstop>clickme</tabstop>
+  <tabstop>ItemListView</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
