@@ -102,7 +102,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
     def itemclicked(self,iteem):
         print("item clicked: ",iteem)
         
-        i=0;
+        i=0
         while i<len(item_list):
             if(self.ItemListView.item(i)== iteem):
                 break
