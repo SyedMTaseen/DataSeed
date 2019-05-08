@@ -59,7 +59,7 @@
    <widget class="QPushButton" name="view_req_btn">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>240</x>
       <y>10</y>
       <width>181</width>
       <height>41</height>
@@ -204,7 +204,7 @@
    <widget class="QLabel" name="Lerror3">
     <property name="geometry">
      <rect>
-      <x>360</x>
+      <x>330</x>
       <y>80</y>
       <width>281</width>
       <height>16</height>

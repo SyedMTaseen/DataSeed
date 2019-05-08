@@ -23,6 +23,7 @@ def addcoment():
     pg1.label_3.setMinimumHeight(24)
     pg1.label_3.setMaximumHeight(28)
     ###DB se value ae gy
+    ###SAAD DB currently login user ko abc se replace krna h
     pg1.label_3.setText( "Comment By:"+"abc")
     #pg1.layout.addWidget(pg1.label_3)
     
@@ -55,6 +56,7 @@ def savecmnt():
         pg1.Lerror.setText("")
         pg1.comentButton.show()
         pg1.saveButton.hide()
+        ##SAAD DB coment ko store krwana h DB ma
         pg1.textEdit.setReadOnly(True)
 
 def renderlist():
@@ -63,6 +65,7 @@ def renderlist():
         layout.setSizeConstraint(QLayout.SetMinimumSize)
         
         item = QListWidgetItem(mainpg.listWidget)
+        ###SAAD DB mydic_list add all total requests!
         label = QLabel(str(i+1)+ ") Title:" + mydic_list[i]['title'] + "\n" + "     Request By: " + mydic_list[i]['Requested By'])
         label.setStyleSheet("height:fit-content;font-size:12pt;font-family: Segoe UI;font-style: normal;font-weight:100")
         label.setWordWrap(True);
@@ -88,6 +91,7 @@ def renderlist():
 def changestatus():
     ###check author h toh show kr do
     print("Simply DB se value modify krni h")
+    ###SAAD DB status change kr do 
     pg1.Bresolve.hide()
 def initialization():
     pg1.saveButton.hide()
@@ -96,6 +100,7 @@ def initialization():
 
     pg1.scrollArea.setWidget(pg1.scroll)
     pg1.scroll.setLayout(pg1.layout)
+    pg1.saveButton.hide()
 
 def itemclicked(iteem):
     i=0;
@@ -107,6 +112,7 @@ def itemclicked(iteem):
     pg1.show()
     pg1.requestButton.hide()
     pg1.Ltitle.setText("Saad DB se "+str(i)+"th entry ka show kara do")
+    ###SAAD DB request kia thi n kon kon se coment s the sab show karwao 
 
 if __name__=="__main__":
     mydic_list=(

@@ -18,6 +18,7 @@ def itemclicked(iteem):
     pg1.show()
     pg1.requestButton.hide()
     pg1.Ltitle.setText("Saad DB se "+str(i)+"th entry ko show kara do")
+    ###SAAD DB request kia thi n kon kon se coment s the sab show karwao 
 
 def renderlist():
     for i in range(len(mydic_list)):
@@ -25,6 +26,7 @@ def renderlist():
         layout.setSizeConstraint(QLayout.SetMinimumSize)
         
         item = QListWidgetItem(pg2.listWidget)
+        ####SAAD DB currently login user keh comment dikhao
         label = QLabel(str(i+1)+ ") Title:" + mydic_list[i]['title'] + "\n" + "     Request By: " + mydic_list[i]['Requested By'])
         label.setStyleSheet("height:fit-content;font-size:12pt;font-family: Segoe UI;font-style: normal;font-weight:100")
         label.setWordWrap(True);
@@ -67,6 +69,7 @@ def deleteitem():
         print(i)
         
         pg2.listWidget.takeItem(i)
+        ###SAAD DB currently login ke ith index wali request delete krwa do
         ###delete from DB also!!!.....foran hone zarori h wrna index ma msle ajen gy
         #mydic_list.pop(i)
         #renderlist()

@@ -30,7 +30,8 @@ list(curr_user)
 
 def loginpressed():
     if(login.TUname.text()== curr_user["username"] and login.Tpass.text() == curr_user["password"]):
-        login.Lerror.setText("Redirect page is not added")
+        #login.Lerror.setText("Redirect page is not added")
+        # SAAD DB
         os.system('python mainpage.py')
     else:
         login.Lerror.setText("Invalid Username or password")
@@ -45,6 +46,7 @@ def forgetpressed():
 
 def verifyinfo():
     if (forgetwindow.Tques.text()==forgetwindow.Tans.text()):
+        # SAAD DB
         sendmail(forgetwindow.Temail.text(),1)
         
         time.sleep(5)
@@ -56,6 +58,7 @@ def sendmail(emailid,flag):
         fromaddr="pashaafrozsyed@gmail.com"
         toaddr = emailid
         msgg = "Your Password is: if you havn't request for password reset kindly ignore this mail"
+        # SAAD DB
         subj = "Password Reset Mail"
 
         message = MIMEMultipart()
@@ -125,6 +128,7 @@ def registerpressed():
         elif(signup.Tans.text()==""):
             signup.Lerror.setText("Answer is required")    
         else:
+            # SAAD DB
             sendmail(signup.Temail.text(),2)
             signup.Lerror.setText("Register Successfull")
 
