@@ -32,7 +32,7 @@ def renderpurchaselist():
         
         item = QListWidgetItem(mpg.listWidget_3)
         # SAAD DB user purchase history
-        label = QLabel(str(i+1)+ ") Title:" + mydic_list[i]['title'] + "\n" + "     Request By: " + mydic_list[i]['Requested By'])
+        label = QLabel(str(i+1)+ ") Title:" + mydic_list[i]['title'] + "\n" + "     Request By: " + mydic_list[i]['Requested By']+"\n" +"     Rating: " + str(mydic_list[i]['rating']) + "/5")
         label.setStyleSheet("height:fit-content;font-size:12pt;font-family: Segoe UI;font-style: normal;font-weight:100")
         label.setWordWrap(True);
         
@@ -61,7 +61,7 @@ def renderselllist():
         
         item = QListWidgetItem(mpg.listWidget_3)
         # SAAD DB user want to sell
-        label = QLabel(str(i+1)+ ") Title:" + mydic_list2[i]['title'] + "\n" + "     Request By: " + mydic_list[i]['Requested By'])
+        label = QLabel(str(i+1)+ ") Title:" + mydic_list2[i]['title'] + "\n" + "     Request By: " + mydic_list[i]['Requested By']+ "\n" +"Rating: " + str(mydic_list[i]['rating']) + "/5")
         label.setStyleSheet("height:fit-content;font-size:12pt;font-family: Segoe UI;font-style: normal;font-weight:100")
         label.setWordWrap(True);
         
@@ -204,12 +204,14 @@ if __name__ == "__main__":
         {"title":"Request 2",
             "No of comment":"5",
             "Requested By":"Hamzaaa",
-            "status":"Fullfilled"}, 
+            "status":"Fullfilled",
+            "rating":"3.5"}, 
 
         {"title":"Request 3",
             "No of comment":"9",
             "Requested By":"Aomore",
-            "status":"pending"})
+            "status":"pending",
+            "rating":"3.5"})
     mydic_list1=['shark', 'cuttlefish', 'squid', 'mantis shrimp', 'anemone']
     mpg.purchase_btn.clicked.connect(CalculateTax)
     mpg.sell_btn.clicked.connect(CalculateTax2)
