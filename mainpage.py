@@ -216,7 +216,7 @@ if __name__ == "__main__":
     mpg.view_req_btn.clicked.connect(CalculateTax3)
     mpg.post_req_btn.clicked.connect(CalculateTax4)
     #mpg.deletereq.clicked.connect(deleterequest)
-    mpg.listWidget_3.itemDoubleClicked.connect(itemclicked)
+    # mpg.listWidget_3.itemDoubleClicked.connect(itemclicked)   // pasha lagai ga on list widget 2 
     popup.saveButton.clicked.connect(savereq)
     mpg.deleterecord.clicked.connect(deleterecord)
     mpg.deletedata.clicked.connect(deletedata)

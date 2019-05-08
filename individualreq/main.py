@@ -19,7 +19,12 @@ def itemclicked(iteem):
     pg1.requestButton.hide()
     pg1.Ltitle.setText("Saad DB se "+str(i)+"th entry ko show kara do")
     ###SAAD DB request kia thi n kon kon se coment s the sab show karwao 
+def changestatus():
+    ###check author h toh show kr do
+    print("Simply DB se value modify krni h")
+    pg1.Bresolve.hide()
 
+    ###SAAD DB status change kr do
 def renderlist():
     for i in range(len(mydic_list)):
         layout = QHBoxLayout()
@@ -91,7 +96,7 @@ if __name__=="__main__":
 
     pg2.listWidget.itemDoubleClicked.connect(itemclicked)
     pg2.deleteButton.clicked.connect(deleteitem)
-
+    pg1.Bresolve.clicked.connect(changestatus)
     pg2.show()
     renderlist()
     

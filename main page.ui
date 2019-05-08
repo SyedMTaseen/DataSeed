@@ -171,6 +171,9 @@
     <property name="text">
      <string>Delete Record</string>
     </property>
+    <property name="autoDefault">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QPushButton" name="deletedata">
     <property name="geometry">
@@ -183,6 +186,9 @@
     </property>
     <property name="text">
      <string>Delete Data</string>
+    </property>
+    <property name="autoDefault">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QLabel" name="Lerror2">
@@ -234,6 +240,9 @@
     <property name="text">
      <string>My Requests</string>
     </property>
+    <property name="autoDefault">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QListWidget" name="listWidget_3">
     <property name="geometry">
@@ -267,6 +276,18 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <tabstops>
+  <tabstop>post_req_btn</tabstop>
+  <tabstop>view_req_btn</tabstop>
+  <tabstop>myreqButton</tabstop>
+  <tabstop>purchase_btn</tabstop>
+  <tabstop>sell_btn</tabstop>
+  <tabstop>listWidget</tabstop>
+  <tabstop>listWidget_2</tabstop>
+  <tabstop>deleterecord</tabstop>
+  <tabstop>deletedata</tabstop>
+  <tabstop>listWidget_3</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

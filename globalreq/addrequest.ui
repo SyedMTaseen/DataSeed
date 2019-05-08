@@ -111,6 +111,11 @@
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>Ttitle</tabstop>
+  <tabstop>desbox</tabstop>
+  <tabstop>saveButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

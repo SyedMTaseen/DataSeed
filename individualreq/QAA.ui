@@ -84,32 +84,6 @@
      <string>Next</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="comentButton">
-    <property name="geometry">
-     <rect>
-      <x>660</x>
-      <y>380</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Comment</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="saveButton">
-    <property name="geometry">
-     <rect>
-      <x>660</x>
-      <y>380</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Save</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="Lerror">
     <property name="geometry">
      <rect>
@@ -201,17 +175,6 @@
      <string>Mark Resolved</string>
     </property>
    </widget>
-   <zorder>requestButton</zorder>
-   <zorder>desbox</zorder>
-   <zorder>label</zorder>
-   <zorder>pushButton_2</zorder>
-   <zorder>pushButton_3</zorder>
-   <zorder>saveButton</zorder>
-   <zorder>Lerror</zorder>
-   <zorder>scrollArea</zorder>
-   <zorder>Ltitle</zorder>
-   <zorder>Bresolve</zorder>
-   <zorder>comentButton</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

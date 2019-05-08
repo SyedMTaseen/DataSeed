@@ -32,6 +32,7 @@ def loginpressed():
     if(login.TUname.text()== curr_user["username"] and login.Tpass.text() == curr_user["password"]):
         #login.Lerror.setText("Redirect page is not added")
         # SAAD DB
+        login.hide()
         os.system('python mainpage.py')
     else:
         login.Lerror.setText("Invalid Username or password")
@@ -149,5 +150,6 @@ if __name__ == "__main__":
     login.forgetButton.clicked.connect(forgetpressed)
     signup.RegisterButton.clicked.connect(registerpressed)
     forgetwindow.verifyButton.clicked.connect(verifyinfo)
+    login.Tpass.returnPressed.connect(login.loginButton.click)
     login.show()
     app.exec()

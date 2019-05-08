@@ -163,7 +163,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             layout.setSizeConstraint(QLayout.SetMinimumSize);
             
             item = QListWidgetItem(self.ItemListView)
-            label = QLabel(str(i+1)+ ") " + item_list[i]['short_description'] + "\n" + "Uploaded By: " + str(item_list[i]['uploaded_by']) + "\n" +"Rating: 3/5" )
+            label = QLabel(str(i+1)+ ") " + item_list[i]['short_description'] + "\n" + "Uploaded By: " + str(item_list[i]['uploaded_by']) + "\n" +"Rating: " + str(item_list[i]['rating']) + "/5" )
             label.setStyleSheet("height:fit-content;font-size:12pt;font-style: normal;font-weight:100;");
           #  label.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Minimum)
             label.setWordWrap(True);

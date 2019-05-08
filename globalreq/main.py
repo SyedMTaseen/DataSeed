@@ -88,11 +88,7 @@ def renderlist():
         
         mainpg.listWidget.addItem(item)
         mainpg.listWidget.setItemWidget(item,widget)
-def changestatus():
-    ###check author h toh show kr do
-    print("Simply DB se value modify krni h")
-    ###SAAD DB status change kr do 
-    pg1.Bresolve.hide()
+ 
 def initialization():
     pg1.saveButton.hide()
     pg1.layout.setAlignment(QtCore.Qt.AlignTop)
@@ -134,7 +130,7 @@ if __name__=="__main__":
     pg1.requestButton.clicked.connect(addrequest)
     popup.saveButton.clicked.connect(savereq)
     pg1.saveButton.clicked.connect(savecmnt)
-    pg1.Bresolve.clicked.connect(changestatus)
+    
     mainpg.listWidget.itemDoubleClicked.connect(itemclicked)
 
     mainpg.show()

@@ -110,6 +110,9 @@
     <property name="text">
      <string>Verify</string>
     </property>
+    <property name="autoDefault">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
@@ -147,6 +150,12 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <tabstops>
+  <tabstop>Temail</tabstop>
+  <tabstop>Tques</tabstop>
+  <tabstop>Tans</tabstop>
+  <tabstop>verifyButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
