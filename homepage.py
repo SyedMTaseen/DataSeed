@@ -9,6 +9,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets, uic, Qt
 from PyQt5.QtWidgets import QLayout, QSizePolicy, QApplication, QWidget, QListWidget, QVBoxLayout, QLabel, QPushButton, QListWidgetItem, QHBoxLayout
 import pymongo
 import datetime
+#from __future__ import absolute_import, division, print_function
+import datetime
+import pandas as pd
+import numpy as np
+import dfgui
 
 
 # In[2]:
@@ -56,7 +61,7 @@ Ui_MainWindow, QtBaseClass = uic.loadUiType(qtCreatorFile)
 
 
 filterItem = ['All item', 'Medical', 'Movies', 'General']
-
+path = 0
 
 # dummy_dataset = [{
 #     "uploaded_by": 123,
@@ -105,8 +110,9 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
 #         pg1.show()
 #         pg1.requestButton.hide()
 #         pg1.Ltitle.setText("Saad DB se "+str(i)+"th entry ka show kara do")
-    def PurchaseWindowOpen(self, item_index):
 
+    def PurchaseWindowOpen(self, item_index):
+        global path
         print(item_list[item_index])
         self.purchase_window.show()
         self.purchase_window.descr.setText(
@@ -121,6 +127,15 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             str(item_list[item_index]['rating']))
         self.purchase_window.title.setText(
             item_list[item_index]['short_description'])
+        self.purchase_window.viewdatabtn.clicked.connect(
+            self.viewdata)
+        path = item_list[item_index]["data_location"]
+
+    def viewdata(self):
+        global path
+        print(path)
+        df = pd.read_csv(path)
+        dfgui.show(df.head(10))
 
     def Search_Query(self, query):
         search_list = []

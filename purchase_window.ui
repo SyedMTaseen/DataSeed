@@ -236,7 +236,7 @@
      <string>TextLabel</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="viewdata">
+   <widget class="QPushButton" name="viewdatabtn">
     <property name="geometry">
      <rect>
       <x>200</x>

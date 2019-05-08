@@ -1,70 +1,49 @@
-class PandasModel(QtCore.QAbstractTableModel):
-    def __init__(self, df=pd.DataFrame(), parent=None):
-        QtCore.QAbstractTableModel.__init__(self, parent=parent)
-        self._df = df
+#!/usr/bin/env python
+# -*- encoding: utf-8
 
-    def headerData(self, section, orientation, role=QtCore.Qt.DisplayRole):
-        if role != QtCore.Qt.DisplayRole:
-            return QtCore.QVariant()
+from __future__ import absolute_import, division, print_function
 
-        if orientation == QtCore.Qt.Horizontal:
-            try:
-                return self._df.columns.tolist()[section]
-            except (IndexError, ):
-                return QtCore.QVariant()
-        elif orientation == QtCore.Qt.Vertical:
-            try:
-                # return self.df.index.tolist()
-                return self._df.index.tolist()[section]
-            except (IndexError, ):
-                return QtCore.QVariant()
+"""
+If you are getting wx related import errors when running in a virtualenv:
+Either make sure that the virtualenv has been created using
+`virtualenv --system-site-packages venv` or manually add the wx library
+path (e.g. /usr/lib/python2.7/dist-packages/wx-2.8-gtk2-unicode) to the
+python path.
+"""
 
-    def data(self, index, role=QtCore.Qt.DisplayRole):
-        if role != QtCore.Qt.DisplayRole:
-            return QtCore.QVariant()
-
-        if not index.isValid():
-            return QtCore.QVariant()
-
-        return QtCore.QVariant(str(self._df.ix[index.row(), index.column()]))
-
-    def setData(self, index, value, role):
-        row = self._df.index[index.row()]
-        col = self._df.columns[index.column()]
-        if hasattr(value, 'toPyObject'):
-            # PyQt4 gets a QVariant
-            value = value.toPyObject()
-        else:
-            # PySide gets an unicode
-            dtype = self._df[col].dtype
-            if dtype != object:
-                value = None if value == '' else dtype.type(value)
-        self._df.set_value(row, col, value)
-        return True
-
-    def rowCount(self, parent=QtCore.QModelIndex()):
-        return len(self._df.index)
-
-    def columnCount(self, parent=QtCore.QModelIndex()):
-        return len(self._df.columns)
-
-    def sort(self, column, order):
-        colname = self._df.columns.tolist()[column]
-        self.layoutAboutToBeChanged.emit()
-        self._df.sort_values(colname, ascending=order ==
-                             QtCore.Qt.AscendingOrder, inplace=True)
-        self._df.reset_index(inplace=True, drop=True)
-        self.layoutChanged.emit()
-
-    def btn_clk(self):
-    path = ""
-    df = pd.read_csv(path)
-    model = PandasModel(df)
-    self.tableView.setModel(model)
+import datetime
+import pandas as pd
+import numpy as np
+import dfgui
 
 
-if __name__ == "__main__":
-    app = QtWidgets.QApplication(sys.argv)
-    window = MyApp()
-    window.show()
-    sys.exit(app.exec_())
+def create_dummy_data(size):
+
+    user_ids = np.random.randint(1, 1000000, 10)
+    product_ids = np.random.randint(1, 1000000, 100)
+
+    def choice(*values):
+        return np.random.choice(values, size)
+
+    random_dates = [
+        datetime.date(2016, 1, 1) + datetime.timedelta(days=int(delta))
+        for delta in np.random.randint(1, 50, size)
+    ]
+
+    return pd.DataFrame.from_items([
+        ("Date", random_dates),
+        ("UserID", choice(*user_ids)),
+        ("ProductID", choice(*product_ids)),
+        ("IntColumn", choice(1, 2, 3)),
+        ("FloatColumn", choice(np.nan, 1.0, 2.0, 3.0)),
+        ("StringColumn", choice("A", "B", "C")),
+        ("Gaussian 1", np.random.normal(0, 1, size)),
+        ("Gaussian 2", np.random.normal(0, 1, size)),
+        ("Uniform", np.random.uniform(0, 1, size)),
+        ("Binomial", np.random.binomial(20, 0.1, size)),
+        ("Poisson", np.random.poisson(1.0, size)),
+    ])
+
+df = create_dummy_data(1000)
+
+dfgui.show(df)
