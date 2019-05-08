@@ -52,6 +52,17 @@ class PurchaseWindow(QtWidgets.QMainWindow, Ui_MainWindow_pur):
 #         self.sell_btn.clicked.connect(self.CalculateTax2)
 
 
+qtCreatorFile_pay = "Payment.ui"  # Enter file here.
+
+Ui_MainWindow_pay, QtBaseClass = uic.loadUiType(qtCreatorFile_pay)
+
+
+class PaymentWindow(QtWidgets.QMainWindow, Ui_MainWindow_pay):
+    def __init__(self):
+        QtWidgets.QMainWindow.__init__(self)
+        Ui_MainWindow.__init__(self)
+        self.setupUi(self)
+
 # In[ ]:
 
 
@@ -77,6 +88,8 @@ path = 0
 
 original_list_item = item_list.copy()
 
+pay_obj = 0
+
 
 class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
 
@@ -95,6 +108,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ItemListView.itemDoubleClicked.connect(self.itemclicked)
         self.purchase_window = uic.loadUi("purchase_window.ui")
         self.searchBox.returnPressed.connect(self.clickme.click)
+        self.payment_window = uic.loadUi("payment.ui")
 
     def itemclicked(self, iteem):
         print("item clicked: ", iteem)
@@ -114,6 +128,8 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
     def PurchaseWindowOpen(self, item_index):
         global path
         print(item_list[item_index])
+        global pay_obj
+        pay_obj = item_list[item_index]
         self.purchase_window.show()
         self.purchase_window.descr.setText(
             item_list[item_index]['full_description'])
@@ -129,7 +145,29 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             item_list[item_index]['short_description'])
         self.purchase_window.viewdatabtn.clicked.connect(
             self.viewdata)
+        self.purchase_window.paybtn.clicked.connect(
+            self.paypage)
         path = item_list[item_index]["data_location"]
+
+    def paypage(self):
+        global pay_obj
+        self.purchase_window.hide()
+        self.payment_window.show()
+        self.payment_window.cost.setText(pay_obj['cost'])
+        comm = int(pay_obj['cost'])*5
+        comm = comm/100
+        self.payment_window.comm.setText(str(comm))
+        self.payment_window.total.setText(str(comm + int(pay_obj['cost'])))
+
+        self.payment_window.proceedbtn.clicked.connect(
+            self.proceed)
+
+    def proceed(self):
+        global pay_obj
+        cardnum = self.payment_window.cardnum.text()
+        exp = self.payment_window.exp.text()
+        print(exp)
+        print(cardnum)
 
     def viewdata(self):
         global path
@@ -214,7 +252,6 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
 #             for item in dummy_dataset:
 #                 for key,value in item.items():
 #                     strr += key + ' ' + str(value) + '\n'
-
 
     def selectionchange(self, i):
         global original_list_item

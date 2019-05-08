@@ -239,7 +239,7 @@
    <widget class="QPushButton" name="viewdatabtn">
     <property name="geometry">
      <rect>
-      <x>200</x>
+      <x>120</x>
       <y>500</y>
       <width>161</width>
       <height>41</height>
@@ -254,10 +254,10 @@
      <string>View Sample Data</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="paybtn">
     <property name="geometry">
      <rect>
-      <x>400</x>
+      <x>520</x>
       <y>500</y>
       <width>161</width>
       <height>41</height>
@@ -332,6 +332,24 @@
     </property>
     <property name="orientation">
      <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="preparebtn">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>500</y>
+      <width>161</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Prepare Data</string>
     </property>
    </widget>
   </widget>
