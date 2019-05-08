@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>My Requests</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QListWidget" name="listWidget">
@@ -52,7 +52,7 @@
      </font>
     </property>
     <property name="text">
-     <string> </string>
+     <string/>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>

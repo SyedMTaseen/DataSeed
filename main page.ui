@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1339</width>
-    <height>700</height>
+    <width>1166</width>
+    <height>691</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -38,7 +38,7 @@
    <widget class="QPushButton" name="sell_btn">
     <property name="geometry">
      <rect>
-      <x>1140</x>
+      <x>960</x>
       <y>10</y>
       <width>191</width>
       <height>41</height>
@@ -59,7 +59,7 @@
    <widget class="QPushButton" name="view_req_btn">
     <property name="geometry">
      <rect>
-      <x>500</x>
+      <x>260</x>
       <y>10</y>
       <width>181</width>
       <height>41</height>
@@ -102,37 +102,27 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>100</y>
-      <width>671</width>
-      <height>561</height>
+      <y>110</y>
+      <width>891</width>
+      <height>261</height>
      </rect>
     </property>
    </widget>
    <widget class="QListWidget" name="listWidget_2">
     <property name="geometry">
      <rect>
-      <x>690</x>
-      <y>190</y>
+      <x>950</x>
+      <y>120</y>
       <width>201</width>
       <height>361</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QListWidget" name="listWidget_3">
-    <property name="geometry">
-     <rect>
-      <x>910</x>
-      <y>120</y>
-      <width>421</width>
-      <height>531</height>
      </rect>
     </property>
    </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>630</x>
-      <y>140</y>
+      <x>890</x>
+      <y>70</y>
       <width>271</width>
       <height>41</height>
      </rect>
@@ -154,8 +144,8 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>50</y>
-      <width>181</width>
+      <y>70</y>
+      <width>221</width>
       <height>41</height>
      </rect>
     </property>
@@ -166,46 +156,14 @@
      </font>
     </property>
     <property name="text">
-     <string>My Data:</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_3">
-    <property name="geometry">
-     <rect>
-      <x>910</x>
-      <y>60</y>
-      <width>151</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Segoe UI</family>
-      <pointsize>18</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>My Requests:</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="deletereq">
-    <property name="geometry">
-     <rect>
-      <x>1240</x>
-      <y>90</y>
-      <width>91</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Delete Request</string>
+     <string>My Data For Sell:</string>
     </property>
    </widget>
    <widget class="QPushButton" name="deleterecord">
     <property name="geometry">
      <rect>
-      <x>800</x>
-      <y>560</y>
+      <x>1060</x>
+      <y>490</y>
       <width>91</width>
       <height>23</height>
      </rect>
@@ -217,8 +175,8 @@
    <widget class="QPushButton" name="deletedata">
     <property name="geometry">
      <rect>
-      <x>570</x>
-      <y>70</y>
+      <x>790</x>
+      <y>80</y>
       <width>111</width>
       <height>23</height>
      </rect>
@@ -230,8 +188,8 @@
    <widget class="QLabel" name="Lerror2">
     <property name="geometry">
      <rect>
-      <x>710</x>
-      <y>600</y>
+      <x>970</x>
+      <y>530</y>
       <width>171</width>
       <height>16</height>
      </rect>
@@ -246,8 +204,8 @@
    <widget class="QLabel" name="Lerror3">
     <property name="geometry">
      <rect>
-      <x>200</x>
-      <y>70</y>
+      <x>360</x>
+      <y>80</y>
       <width>281</width>
       <height>16</height>
      </rect>
@@ -259,20 +217,51 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="Lerror1">
+   <widget class="QPushButton" name="myreqButton">
     <property name="geometry">
      <rect>
-      <x>1020</x>
-      <y>660</y>
-      <width>201</width>
-      <height>21</height>
+      <x>480</x>
+      <y>10</y>
+      <width>171</width>
+      <height>41</height>
      </rect>
     </property>
-    <property name="text">
-     <string/>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
     </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
+    <property name="text">
+     <string>My Requests</string>
+    </property>
+   </widget>
+   <widget class="QListWidget" name="listWidget_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>410</y>
+      <width>891</width>
+      <height>261</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>370</y>
+      <width>221</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Segoe UI</family>
+      <pointsize>20</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Purchase History:</string>
     </property>
    </widget>
   </widget>

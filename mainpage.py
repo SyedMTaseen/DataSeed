@@ -22,8 +22,10 @@ def CalculateTax3():
     os.system('python ./globalreq/main.py')
 def CalculateTax4():
     popup.show()
+def CalculateTax5():
+    os.system('python ./individualreq/main.py')
 
-def renderrequestlist():
+def renderpurchaselist():
     for i in range(len(mydic_list)):
         layout = QHBoxLayout()
         layout.setSizeConstraint(QLayout.SetMinimumSize)
@@ -176,14 +178,15 @@ if __name__ == "__main__":
     mpg.sell_btn.clicked.connect(CalculateTax2)
     mpg.view_req_btn.clicked.connect(CalculateTax3)
     mpg.post_req_btn.clicked.connect(CalculateTax4)
-    mpg.deletereq.clicked.connect(deleterequest)
+    #mpg.deletereq.clicked.connect(deleterequest)
     mpg.listWidget_3.itemDoubleClicked.connect(itemclicked)
     popup.saveButton.clicked.connect(savereq)
     mpg.deleterecord.clicked.connect(deleterecord)
     mpg.deletedata.clicked.connect(deletedata)
+    mpg.myreqButton.clicked.connect(CalculateTax5)
 
     mpg.show()
-    renderrequestlist()
+    renderpurchaselist()
     rendersearchlist()
     app.exec()
 
