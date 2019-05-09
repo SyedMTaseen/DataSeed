@@ -5,9 +5,12 @@ import ctypes
 app = QtWidgets.QApplication([])
 
 
-pg1 = uic.loadUi("./globalreq/QAA.ui")
-popup = uic.loadUi("./globalreq/addrequest.ui")
-mainpg = uic.loadUi("./globalreq/Requestpg.ui")
+ pg1 = uic.loadUi("./globalreq/QAA.ui")
+ popup = uic.loadUi("./globalreq/addrequest.ui")
+ mainpg = uic.loadUi("./globalreq/Requestpg.ui")
+# pg1 = uic.loadUi("QAA.ui")
+# popup = uic.loadUi("addrequest.ui")
+# mainpg = uic.loadUi("Requestpg.ui")
 
 def addcoment():
     
@@ -114,7 +117,42 @@ def itemclicked(iteem):
     mainpg.hide()
     pg1.show()
     pg1.requestButton.hide()
-    pg1.Ltitle.setText("Saad DB se "+str(i)+"th entry ka show kara do")
+
+    #pg1.Ltitle.setText("Saad DB se "+str(i)+"th entry ka show kara do")
+    # dataset = requested_data.find({mydic_list[i]["_id"]})
+    # mydic_list[i]
+
+    # for com in mydic_list[i]["comments"].items()
+    # com["comment"] ; com["commented_by"]
+    ###SAAD DB request kia thi n kon kon se coment s the sab show karwao
+
+
+    pg1.Ltitle.setText(mydic_list2[i]['title'])
+    pg1.desbox.setText(mydic_list2[i]['request'])
+    ###SAAD DB ....dekh len kese coments access hongy mjhe smjh ni arha 
+    
+    for k in mydic_list2[i]['comment']:
+        pg1.textEdit = QtWidgets.QTextEdit(pg1.centralwidget)
+        pg1.textEdit.setGeometry(QtCore.QRect(10, 390, 721, 71))
+
+        pg1.textEdit.setMinimumHeight(31)
+        pg1.textEdit.setMaximumHeight(31)
+
+        pg1.label_3 = QtWidgets.QLabel(pg1.centralwidget)
+        pg1.label_3.setMinimumHeight(24)
+        pg1.label_3.setMaximumHeight(28)
+
+
+        # cu = user.find_one({"_id":curr_user["_id"])}
+        # abc will be: cu["username"]
+        pg1.label_3.setText( "Comment By:")
+        pg1.textEdit.setText(k)
+        #pg1.layout.addWidget(pg1.label_3)
+
+        #pg1.layout.addWidget(pg1.textEdit)
+        mylayout = pg1.scroll.layout()
+        mylayout.addWidget(pg1.label_3)
+        mylayout.addWidget(pg1.textEdit)
     
 if __name__=="__main__":
     mydic_list=(
@@ -127,6 +165,24 @@ if __name__=="__main__":
             "No of comment":"5",
             "Requested By":"Afroz",
             "status":"pending"})
+    mydic_list2=(
+        {"title":"Request 2",
+        "request":"Help me tatata",
+        "comment by":"testing1",
+        "comment":"check1",
+        "comment by":"testing2",
+        "comment":"check2",
+        "comment by":"testing3",
+        "comment":"check3"}, 
+
+        {"title":"Request 3",
+        "request":"Help me urgent",
+        "comment by":"testing5",
+        "comment":"check5",
+        "comment by":"testing6",
+        "comment":"check6",
+        "comment by":"testing7",
+        "comment":"check7"})
 
 
     
@@ -141,5 +197,4 @@ if __name__=="__main__":
 
     mainpg.show()
     renderlist()
-    
     app.exec()

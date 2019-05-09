@@ -57,8 +57,16 @@ def verifyinfo():
         # SAAD DB COMMENTED
         sendmail(forgetwindow.Temail.text(),1)
         
-        time.sleep(5)
-        forgetwindow.hide()
+        #time.sleep(5)
+        #forgetwindow.hide()
+def setquestion():
+    if not forgetwindow.Temail.text:
+        forgetwindow.Lerror.setText("Enter email address")
+        ###SAAD DB
+    # check kro forgetwindow.Temail.text koi valid email return krna rha h??
+    ##yes then forgetwindow.Tques.setText(question) else: forgetwindow.Lerror.setText("No email address found")
+    ##question->db se ae ga  
+
 
 def sendmail(emailid,flag):
     if (flag==1):
@@ -164,6 +172,7 @@ if __name__ == "__main__":
     login.forgetButton.clicked.connect(forgetpressed)
     signup.RegisterButton.clicked.connect(registerpressed)
     forgetwindow.verifyButton.clicked.connect(verifyinfo)
+    forgetwindow.askButton.clicked.connect(setquestion)
     login.Tpass.returnPressed.connect(login.loginButton.click)
     login.show()
     app.exec()

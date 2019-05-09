@@ -18,8 +18,9 @@ app = QtWidgets.QApplication([])
 mpg=uic.loadUi("main page.ui")
 pg1 = uic.loadUi("./individualreq/QAA.ui")
 popup = uic.loadUi("./globalreq/addrequest.ui")
-     
-
+dialog = uic.loadUi("warning box.ui")     
+flag=0
+index=None
     
 def CalculateTax( ):
     os.system('python homepage.py')
@@ -157,21 +158,40 @@ def deleterecord():
         mpg.Lerror2.setText("Select any Item")
 
     else:
-        mpg.Lerror2.setText(" ")   
+        mpg.Lerror2.setText(" ") 
+        global index  
 
         i=0;
         while i<5:
             if(mpg.listWidget_2.item(i)== mpg.listWidget_2.currentItem()):
+                index=i
                 break
             i=i+1
 
-        
-        
-        mpg.listWidget_2.takeItem(i)
+        flag=1
+        dialog.show()
+
+
+def yespressed():
+    dialog.hide()
+    global index
+    if flag==1:
+
+        mpg.listWidget_2.takeItem(index)
         #SAAD DB ? user ke searches ma data ure do 
         ###delete from DB also!!!.....foran hone zarori h wrna index ma msle ajen gy
         #mydic_list.pop(i)
         #renderlist()
+        
+    elif flag==2:
+        mpg.listWidget.takeItem(index)
+        ### SAAD DB ? delete kr do data jo user ko sell kr na h 
+        ###delete from DB also!!!.....foran hone zarori h wrna index ma msle ajen gy
+        #mydic_list.pop(i)
+        #renderlist()
+
+def nopressed():
+    dialog.hide()
 
 def deletedata():
     if not mpg.listWidget.selectedItems():
@@ -179,21 +199,20 @@ def deletedata():
         mpg.Lerror3.setText("Select any Item")
 
     else:
-        mpg.Lerror3.setText(" ")   
+        mpg.Lerror3.setText(" ")
+        global index   
 
         i=0;
         while i<5:
             if(mpg.listWidget.item(i)== mpg.listWidget.currentItem()):
+                index=i
                 break
             i=i+1
 
+        flag=2
+        dialog.show()
         
         
-        mpg.listWidget.takeItem(i)
-        ### SAAD DB ? delete kr do data jo user ko sell kr na h 
-        ###delete from DB also!!!.....foran hone zarori h wrna index ma msle ajen gy
-        #mydic_list.pop(i)
-        #renderlist()
 # def itemclicked(iteem):
 #     i=0;
 #     while i<5:
@@ -237,6 +256,8 @@ if __name__ == "__main__":
     mpg.deleterecord.clicked.connect(deleterecord)
     mpg.deletedata.clicked.connect(deletedata)
     mpg.myreqButton.clicked.connect(CalculateTax5)
+    dialog.yesButton.clicked.connect(yespressed)
+    dialog.noButton.clicked.connect(nopressed)
 
     mpg.show()
     renderpurchaselist()
