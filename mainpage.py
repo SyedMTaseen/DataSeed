@@ -3,8 +3,15 @@ import sys
 import os
 from PyQt5 import QtCore, QtGui, QtWidgets,uic,Qt
 from PyQt5.QtWidgets import QLayout, QSizePolicy,QApplication, QWidget, QListWidget, QVBoxLayout, QLabel, QPushButton, QListWidgetItem,     QHBoxLayout
+import pymongo
+import datetime
 
+data_client = pymongo.MongoClient("mongodb://localhost/")
+ds_db = data_client["dataseed_db"]
+ds_db_user = ds_db["curr_user"]
+cu = ds_db_user.find({})["_id"]
 
+ds_datasets = ds_db["dataset"]
 
 app = QtWidgets.QApplication([])
 
@@ -26,12 +33,18 @@ def CalculateTax5():
     os.system('python ./individualreq/main.py')
 
 def renderpurchaselist():
+    
+#     for i in mydic_list:
+#         if (i["bought_by"]==cu):
+#             print(i)
+    
     for i in range(len(mydic_list)):
         layout = QHBoxLayout()
         layout.setSizeConstraint(QLayout.SetMinimumSize)
         
         item = QListWidgetItem(mpg.listWidget_3)
-        # SAAD DB user purchase history dict
+        # SAAD DB DONE COMMENTED
+
         label = QLabel(str(i+1)+ ") Title:" + mydic_list[i]['title'] + "\n" + "     Request By: " + mydic_list[i]['Requested By']+"\n" +"     Rating: " + str(mydic_list[i]['rating']) + "/5")
         label.setStyleSheet("height:fit-content;font-size:12pt;font-family: Segoe UI;font-style: normal;font-weight:100")
         label.setWordWrap(True);
@@ -55,12 +68,19 @@ def renderpurchaselist():
         mpg.listWidget_3.addItem(item)
         mpg.listWidget_3.setItemWidget(item,widget)
 def renderselllist():
+    
+#     for i in mydic_list:
+#         if (i["uploaded_by"]==cu and i["status"]=="For Sale"):
+#             EVERYTHING HERE with i
+#             pass
+#         pass
+
     for i in range(len(mydic_list)):
         layout = QHBoxLayout()
         layout.setSizeConstraint(QLayout.SetMinimumSize)
         
         item = QListWidgetItem(mpg.listWidget_3)
-        # SAAD DB list of datasets that user wants to sell dict
+        # SAAD DB DONE COMMENTED
         label = QLabel(str(i+1)+ ") Title:" + mydic_list2[i]['title'] + "\n" + "     Request By: " + mydic_list[i]['Requested By']+ "\n" +"Rating: " + str(mydic_list[i]['rating']) + "/5")
         label.setStyleSheet("height:fit-content;font-size:12pt;font-family: Segoe UI;font-style: normal;font-weight:100")
         label.setWordWrap(True);
@@ -84,12 +104,14 @@ def renderselllist():
         mpg.listWidget_3.addItem(item)
         mpg.listWidget_3.setItemWidget(item,widget)
 def rendersearchlist():
+#     mydic_list1 has all the search history. You can iterate with the keywords
+#     for i in mydic_list1 
     for i in range(len(mydic_list1)):
         layout = QHBoxLayout()
         layout.setSizeConstraint(QLayout.SetMinimumSize)
         
         item = QListWidgetItem(mpg.listWidget_2)
-        # SAAD DB user had already searches SEARCH HISTORY OF KEYWORDS dict 
+        # SAAD DB DONE COMMENTED BELOW in main  
         label = QLabel(str(i+1)+ ") " + mydic_list1[i] )
         label.setStyleSheet("height:fit-content;font-size:12pt;font-family: Segoe UI;font-style: normal;font-weight:100")
         label.setWordWrap(True);
@@ -125,7 +147,7 @@ def deleterequest():
         
         
         mpg.listWidget_3.takeItem(i)
-        #SAAD DB jo request ith index p h usko del kr do
+        #SAAD DB ? jo request ith index p h usko del kr do
         ###delete from DB also!!!.....foran hone zarori h wrna index ma msle ajen gy
         #mydic_list.pop(i)
         #renderlist()
@@ -146,7 +168,7 @@ def deleterecord():
         
         
         mpg.listWidget_2.takeItem(i)
-        #SAAD DB user ke searches ma data ure do 
+        #SAAD DB ? user ke searches ma data ure do 
         ###delete from DB also!!!.....foran hone zarori h wrna index ma msle ajen gy
         #mydic_list.pop(i)
         #renderlist()
@@ -168,7 +190,7 @@ def deletedata():
         
         
         mpg.listWidget.takeItem(i)
-        ### SAAD DB delete kr do data jo user ko sell kr na h 
+        ### SAAD DB ? delete kr do data jo user ko sell kr na h 
         ###delete from DB also!!!.....foran hone zarori h wrna index ma msle ajen gy
         #mydic_list.pop(i)
         #renderlist()
@@ -181,9 +203,9 @@ def itemclicked(iteem):
     mpg.hide()
     pg1.show()
     pg1.requestButton.hide()
-    ###SAAD DB 
+    ###SAAD DB ?
     pg1.Ltitle.setText("Saad DB se "+str(i)+"th entry ko show kara do")
-    ###SAAD DB request kia thi n kon kon se coment s the sab show karwao 
+    ###SAAD DB ? request kia thi n kon kon se coment s the sab show karwao 
 
 def savereq():
     if not popup.Ttitle.toPlainText():
@@ -193,27 +215,18 @@ def savereq():
         popup.Lerror.setStyleSheet("QLabel {color:red;}")
         popup.Lerror.setText("Enter atleast 10 words")
     else:
-        #SAAD DB
-        # requested_data.insert({})
+        #SAAD DB DONE COMMENTED BUT SPECIFY THE FIELDS PLEASE
+        q = requested_data.insert({"title": popup.Ttitle.toPlainText(), "description": popup.desbox.toPlainText(), "requested_by":cu,"requested_on":,"status":"Pending"})
         # insert all info regarding the new requested data
         pg1.Ltitle.setText(popup.Ttitle.toPlainText())
         pg1.desbox.setText(popup.desbox.toPlainText())
         popup.hide()       
         
 if __name__ == "__main__":
-    mydic_list=(
-        {"title":"Request 2",
-            "No of comment":"5",
-            "Requested By":"Hamzaaa",
-            "status":"Fullfilled",
-            "rating":"3.5"}, 
+#   mydic_list = list(ds_datasets.find({"bought_by": cu}))
+    mydic_list = list(ds_datasets.find({}))
 
-        {"title":"Request 3",
-            "No of comment":"9",
-            "Requested By":"Aomore",
-            "status":"pending",
-            "rating":"3.5"})
-    mydic_list1=['shark', 'cuttlefish', 'squid', 'mantis shrimp', 'anemone']
+    mydic_list1= ds_user.find_one({"username":cu}, {"search_history":1,"_id":0})["search_history"]
     mpg.purchase_btn.clicked.connect(CalculateTax)
     mpg.sell_btn.clicked.connect(CalculateTax2)
     mpg.view_req_btn.clicked.connect(CalculateTax3)
