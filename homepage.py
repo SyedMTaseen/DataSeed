@@ -63,6 +63,18 @@ class PaymentWindow(QtWidgets.QMainWindow, Ui_MainWindow_pay):
         Ui_MainWindow.__init__(self)
         self.setupUi(self)
 
+
+qtCreatorFile_prep = "preparedata.ui"  # Enter file here.
+
+Ui_MainWindow_prep, QtBaseClass = uic.loadUiType(qtCreatorFile_prep)
+
+
+class PrepWindow(QtWidgets.QMainWindow, Ui_MainWindow_prep):
+    def __init__(self):
+        QtWidgets.QMainWindow.__init__(self)
+        Ui_MainWindow.__init__(self)
+        self.setupUi(self)
+
 # In[ ]:
 
 
@@ -109,6 +121,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.purchase_window = uic.loadUi("purchase_window.ui")
         self.searchBox.returnPressed.connect(self.clickme.click)
         self.payment_window = uic.loadUi("payment.ui")
+        self.prep_window = uic.loadUi("preparedata.ui")
 
     def itemclicked(self, iteem):
         print("item clicked: ", iteem)
@@ -148,6 +161,31 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.purchase_window.paybtn.clicked.connect(
             self.paypage)
         path = item_list[item_index]["data_location"]
+        self.purchase_window.preparebtn.clicked.connect(
+            self.prepare)
+
+    def prepare(self):
+        self.prep_window.show()
+        self.purchase_window.hide()
+        self.prep_window.viewprepbtn.clicked.connect(
+            self.viewdata)
+        self.prep_window.outbtn.clicked.connect(
+            self.outlier)
+        self.prep_window.missbtn.clicked.connect(
+            self.missing)
+        self.prep_window.colbtn.clicked.connect(
+            self.columnerrors)
+        self.prep_window.cleanpaybtn.clicked.connect(
+            self.paypage)
+
+    def outlier(self):
+        pass
+
+    def missing(self):
+        pass
+
+    def columnerrors(self):
+        pass
 
     def paypage(self):
         global pay_obj
@@ -173,7 +211,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         global path
         print(path)
         df = pd.read_csv(path)
-        dfgui.show(df.head(10))
+        dfgui.show(df.head(15))
 
     def Search_Query(self, query):
         search_list = []
@@ -252,6 +290,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
 #             for item in dummy_dataset:
 #                 for key,value in item.items():
 #                     strr += key + ' ' + str(value) + '\n'
+
 
     def selectionchange(self, i):
         global original_list_item
