@@ -31,7 +31,7 @@ def renderpurchaselist():
         layout.setSizeConstraint(QLayout.SetMinimumSize)
         
         item = QListWidgetItem(mpg.listWidget_3)
-        # SAAD DB user purchase history
+        # SAAD DB user purchase history dict
         label = QLabel(str(i+1)+ ") Title:" + mydic_list[i]['title'] + "\n" + "     Request By: " + mydic_list[i]['Requested By']+"\n" +"     Rating: " + str(mydic_list[i]['rating']) + "/5")
         label.setStyleSheet("height:fit-content;font-size:12pt;font-family: Segoe UI;font-style: normal;font-weight:100")
         label.setWordWrap(True);
@@ -60,7 +60,7 @@ def renderselllist():
         layout.setSizeConstraint(QLayout.SetMinimumSize)
         
         item = QListWidgetItem(mpg.listWidget_3)
-        # SAAD DB user want to sell
+        # SAAD DB list of datasets that user wants to sell dict
         label = QLabel(str(i+1)+ ") Title:" + mydic_list2[i]['title'] + "\n" + "     Request By: " + mydic_list[i]['Requested By']+ "\n" +"Rating: " + str(mydic_list[i]['rating']) + "/5")
         label.setStyleSheet("height:fit-content;font-size:12pt;font-family: Segoe UI;font-style: normal;font-weight:100")
         label.setWordWrap(True);
@@ -89,7 +89,7 @@ def rendersearchlist():
         layout.setSizeConstraint(QLayout.SetMinimumSize)
         
         item = QListWidgetItem(mpg.listWidget_2)
-        # SAAD DB user had already searches 
+        # SAAD DB user had already searches SEARCH HISTORY OF KEYWORDS dict 
         label = QLabel(str(i+1)+ ") " + mydic_list1[i] )
         label.setStyleSheet("height:fit-content;font-size:12pt;font-family: Segoe UI;font-style: normal;font-weight:100")
         label.setWordWrap(True);
@@ -193,8 +193,9 @@ def savereq():
         popup.Lerror.setStyleSheet("QLabel {color:red;}")
         popup.Lerror.setText("Enter atleast 10 words")
     else:
-         ### baad ma db ajae ga yhn
-         # SAAD DB request save karo user ke 
+        #SAAD DB
+        # requested_data.insert({})
+        # insert all info regarding the new requested data
         pg1.Ltitle.setText(popup.Ttitle.toPlainText())
         pg1.desbox.setText(popup.desbox.toPlainText())
         popup.hide()       

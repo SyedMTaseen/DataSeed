@@ -18,9 +18,15 @@ def itemclicked(iteem):
     pg1.show()
     pg1.requestButton.hide()
     pg1.Ltitle.setText("Saad DB se "+str(i)+"th entry ko show kara do")
+    # dataset = requested_data.find({mydic_list[i]["_id"]})
+    # mydic_list[i]
+
+    # for com in mydic_list[i]["comments"].items()
+    # com["comment"] ; com["commented_by"]
     ###SAAD DB request kia thi n kon kon se coment s the sab show karwao 
 def changestatus():
     ###check author h toh show kr do
+    # x = requested_data.update({"_id": mydic_list[i]["_id"]}, {$set: {"status":"Fulfilled"}})
     print("Simply DB se value modify krni h")
     pg1.Bresolve.hide()
 
@@ -84,7 +90,8 @@ def deleteitem():
 
 if __name__=="__main__":
     mydic_list=(
-        {"title":"Request 2",
+        {"_id": "234wd",
+        "title":"Request 2",
             "No of comment":"5",
             "Requested By":"Hamzaaa",
             "status":"Fullfilled"}, 
@@ -93,6 +100,8 @@ if __name__=="__main__":
             "No of comment":"9",
             "Requested By":"Aomore",
             "status":"pending"})
+
+    mydic_list[0]['_id']
 
     pg2.listWidget.itemDoubleClicked.connect(itemclicked)
     pg2.deleteButton.clicked.connect(deleteitem)

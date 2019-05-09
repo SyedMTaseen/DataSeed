@@ -22,8 +22,10 @@ def addcoment():
     pg1.label_3 = QtWidgets.QLabel(pg1.centralwidget)
     pg1.label_3.setMinimumHeight(24)
     pg1.label_3.setMaximumHeight(28)
-    ###DB se value ae gy
-    ###SAAD DB currently login user ko abc se replace krna h
+    
+
+    # cu = user.find_one({"_id":curr_user["_id"])}
+    # abc will be: cu["username"]
     pg1.label_3.setText( "Comment By:"+"abc")
     #pg1.layout.addWidget(pg1.label_3)
     
@@ -34,6 +36,7 @@ def addcoment():
 
 
 def addrequest():
+
     popup.show()
 
 def savereq():
@@ -58,6 +61,10 @@ def savecmnt():
         pg1.saveButton.hide()
         ##SAAD DB coment ko store krwana h DB ma
         pg1.textEdit.setReadOnly(True)
+        ###DB se value ae gy
+    	# y = requested_data.update({})
+    	# jo user logged in, jo requested_data hai, us pe comment add hoga ussi user ke naam se
+    	###SAAD DB currently login user ko abc se replace krna h
 
 def renderlist():
     for i in range(len(mydic_list)):
@@ -108,8 +115,7 @@ def itemclicked(iteem):
     pg1.show()
     pg1.requestButton.hide()
     pg1.Ltitle.setText("Saad DB se "+str(i)+"th entry ka show kara do")
-    ###SAAD DB request kia thi n kon kon se coment s the sab show karwao 
-
+    
 if __name__=="__main__":
     mydic_list=(
         {"title":"Request 1",
