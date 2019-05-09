@@ -34,22 +34,22 @@ def CalculateTax5():
 
 def renderpurchaselist():
     
-#     for i in mydic_list:
-#         if (i["bought_by"]==cu):
-#             print(i)
+    for i in mydic_list:
+
+        if (i["bought_by"]==cu):      
     
-    for i in range(len(mydic_list)):
+    #for i in range(len(mydic_list)):
         layout = QHBoxLayout()
         layout.setSizeConstraint(QLayout.SetMinimumSize)
         
         item = QListWidgetItem(mpg.listWidget_3)
         # SAAD DB DONE COMMENTED
 
-        label = QLabel(str(i+1)+ ") Title:" + mydic_list[i]['title'] + "\n" + "     Request By: " + mydic_list[i]['Requested By']+"\n" +"     Rating: " + str(mydic_list[i]['rating']) + "/5")
+        label = QLabel(str(i+1)+ ") Title:" + i['title'] + "\n" + "     Request By: " + i['Requested By']+"\n" +"     Rating: " + str(i['rating']) + "/5")
         label.setStyleSheet("height:fit-content;font-size:12pt;font-family: Segoe UI;font-style: normal;font-weight:100")
         label.setWordWrap(True);
         
-        label2 = QLabel("No of comments " + mydic_list[i]['No of comment'] + '\nStatus: ' + mydic_list[i]['status'])
+        label2 = QLabel("No of comments " + i['No of comment'] + '\nStatus: ' + i['status'])
         label2.setStyleSheet("height:fit-content;font-size:12pt;font-family: Segoe UI;text-align:right")
         label2.setAlignment(QtCore.Qt.AlignCenter)
         label2.setWordWrap(True)
@@ -69,23 +69,23 @@ def renderpurchaselist():
         mpg.listWidget_3.setItemWidget(item,widget)
 def renderselllist():
     
-#     for i in mydic_list:
-#         if (i["uploaded_by"]==cu and i["status"]=="For Sale"):
+    for i in mydic_list:
+        if (i["uploaded_by"]==cu and i["status"]=="For Sale"):
 #             EVERYTHING HERE with i
 #             pass
 #         pass
 
-    for i in range(len(mydic_list)):
+#    for i in range(len(mydic_list)):
         layout = QHBoxLayout()
         layout.setSizeConstraint(QLayout.SetMinimumSize)
         
         item = QListWidgetItem(mpg.listWidget_3)
         # SAAD DB DONE COMMENTED
-        label = QLabel(str(i+1)+ ") Title:" + mydic_list2[i]['title'] + "\n" + "     Request By: " + mydic_list[i]['Requested By']+ "\n" +"Rating: " + str(mydic_list[i]['rating']) + "/5")
+        label = QLabel(str(i+1)+ ") Title:" + i['title'] + "\n" + "     Request By: " + i['Requested By']+ "\n" +"Rating: " + str(i['rating']) + "/5")
         label.setStyleSheet("height:fit-content;font-size:12pt;font-family: Segoe UI;font-style: normal;font-weight:100")
         label.setWordWrap(True);
         
-        label2 = QLabel("No of comments " + mydic_list[i]['No of comment'] + '\nStatus: ' + mydic_list[i]['status'])
+        label2 = QLabel("No of comments " + i['No of comment'] + '\nStatus: ' + i['status'])
         label2.setStyleSheet("height:fit-content;font-size:12pt;font-family: Segoe UI;text-align:right")
         label2.setAlignment(QtCore.Qt.AlignCenter)
         label2.setWordWrap(True)
@@ -130,27 +130,27 @@ def rendersearchlist():
         mpg.listWidget_2.addItem(item)
         mpg.listWidget_2.setItemWidget(item,widget)
     
-def deleterequest():
-    if not mpg.listWidget_3.selectedItems():
-        mpg.Lerror1.setStyleSheet("QLabel {color:red;}")
-        mpg.Lerror1.setText("Select any Item")
+# def deleterequest():
+#     if not mpg.listWidget_3.selectedItems():
+#         mpg.Lerror1.setStyleSheet("QLabel {color:red;}")
+#         mpg.Lerror1.setText("Select any Item")
 
-    else:
-        mpg.Lerror1.setText(" ")
+#     else:
+#         mpg.Lerror1.setText(" ")
 
-        i=0;
-        while i<5:
-            if(mpg.listWidget_3.item(i)== mpg.listWidget_3.currentItem()):
-                break
-            i=i+1
+#         i=0;
+#         while i<5:
+#             if(mpg.listWidget_3.item(i)== mpg.listWidget_3.currentItem()):
+#                 break
+#             i=i+1
 
         
         
-        mpg.listWidget_3.takeItem(i)
-        #SAAD DB ? jo request ith index p h usko del kr do
-        ###delete from DB also!!!.....foran hone zarori h wrna index ma msle ajen gy
-        #mydic_list.pop(i)
-        #renderlist()
+#         mpg.listWidget_3.takeItem(i)
+#         #SAAD DB ? jo request ith index p h usko del kr do
+#         ###delete from DB also!!!.....foran hone zarori h wrna index ma msle ajen gy
+#         #mydic_list.pop(i)
+#         #renderlist()
 def deleterecord():
     if not mpg.listWidget_2.selectedItems():
         mpg.Lerror2.setStyleSheet("QLabel {color:red;}")
@@ -194,18 +194,18 @@ def deletedata():
         ###delete from DB also!!!.....foran hone zarori h wrna index ma msle ajen gy
         #mydic_list.pop(i)
         #renderlist()
-def itemclicked(iteem):
-    i=0;
-    while i<5:
-        if(mpg.listWidget_3.item(i)== iteem):
-            break
-        i=i+1
-    mpg.hide()
-    pg1.show()
-    pg1.requestButton.hide()
-    ###SAAD DB ?
-    pg1.Ltitle.setText("Saad DB se "+str(i)+"th entry ko show kara do")
-    ###SAAD DB ? request kia thi n kon kon se coment s the sab show karwao 
+# def itemclicked(iteem):
+#     i=0;
+#     while i<5:
+#         if(mpg.listWidget_3.item(i)== iteem):
+#             break
+#         i=i+1
+#     mpg.hide()
+#     pg1.show()
+#     pg1.requestButton.hide()
+#     ###SAAD DB ?
+#     pg1.Ltitle.setText("Saad DB se "+str(i)+"th entry ko show kara do")
+#     ###SAAD DB ? request kia thi n kon kon se coment s the sab show karwao 
 
 def savereq():
     if not popup.Ttitle.toPlainText():
