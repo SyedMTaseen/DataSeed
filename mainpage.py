@@ -216,7 +216,7 @@ def savereq():
         popup.Lerror.setText("Enter atleast 10 words")
     else:
         #SAAD DB DONE COMMENTED BUT SPECIFY THE FIELDS PLEASE
-        q = requested_data.insert({"title": popup.Ttitle.toPlainText(), "description": popup.desbox.toPlainText(), "requested_by":cu,"requested_on":,"status":"Pending"})
+        q = requested_data.insert({"title": popup.Ttitle.toPlainText(), "description": popup.desbox.toPlainText(), "requested_by":cu,"requested_on": datetime.datetime.now(),"status":"Pending"})
         # insert all info regarding the new requested data
         pg1.Ltitle.setText(popup.Ttitle.toPlainText())
         pg1.desbox.setText(popup.desbox.toPlainText())
