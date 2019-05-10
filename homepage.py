@@ -26,17 +26,17 @@ data_client = pymongo.MongoClient("mongodb://localhost/")
 ds_db = data_client["dataseed_db"]
 ds_user = ds_db["user"]
 ds_datasets = ds_db["dataset"]
+ds_db_user = ds_db["curr_user"]
 # curr_datasets = ds_datasets.find_many()
 
 for x in ds_datasets.find():
     print(type(x))
     item_list.append(x)
 
-curr_user = ds_user.find_one()
-
+curr_user = ds_db_user.find_one({})["_id"]
+curr_user_name = ds_user.find_one({"_id": curr_user},{"username":1, "_id":0})["username"]
 
 # In[3]:
-
 
 qtCreatorFile_pur = "purchase_window.ui"  # Enter file here.
 

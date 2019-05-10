@@ -3,7 +3,12 @@ from PyQt5 import QtWidgets, uic,QtCore, QtGui,Qt
 from PyQt5.QtWidgets import *
 import ctypes
 app = QtWidgets.QApplication([])
+import pymongo
 
+data_client = pymongo.MongoClient("mongodb://localhost/")
+ds_db = data_client["dataseed_db"]
+curr_db_user = ds_db["curr_user"]
+cu = curr_db_user.find_one({})["_id"]
 
 pg1 = uic.loadUi("./individualreq/QAA.ui")
 pg2 = uic.loadUi("./individualreq/myrequest.ui")
@@ -48,7 +53,6 @@ def renderlist():
         label2.setWordWrap(True)
 
         
-
         layout.addWidget(label)
         layout.addWidget(label2)
         
@@ -85,23 +89,8 @@ def deleteitem():
         #mydic_list.pop(i)
         #renderlist()
 
-
-
-
 if __name__=="__main__":
-    mydic_list=(
-        {"_id": "234wd",
-        "title":"Request 2",
-            "No of comment":"5",
-            "Requested By":"Hamzaaa",
-            "status":"Fullfilled"}, 
-
-        {"title":"Request 3",
-            "No of comment":"9",
-            "Requested By":"Aomore",
-            "status":"pending"})
-
-    mydic_list[0]['_id']
+    mydic_list = list(requested_data.find({"requested_by":cu}))
 
     pg2.listWidget.itemDoubleClicked.connect(itemclicked)
     pg2.deleteButton.clicked.connect(deleteitem)
@@ -110,4 +99,3 @@ if __name__=="__main__":
     renderlist()
     
     app.exec()
-
