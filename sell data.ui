@@ -124,8 +124,8 @@
      <rect>
       <x>260</x>
       <y>310</y>
-      <width>411</width>
-      <height>20</height>
+      <width>331</width>
+      <height>21</height>
      </rect>
     </property>
    </widget>
@@ -181,7 +181,7 @@
    <widget class="QPushButton" name="submit_btn">
     <property name="geometry">
      <rect>
-      <x>180</x>
+      <x>200</x>
       <y>440</y>
       <width>301</width>
       <height>31</height>
@@ -210,6 +210,19 @@
     </property>
     <property name="wordWrap">
      <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="browse_btn">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>310</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Browse</string>
     </property>
    </widget>
   </widget>

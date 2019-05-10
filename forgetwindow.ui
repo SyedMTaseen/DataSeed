@@ -137,6 +137,22 @@
      </rect>
     </property>
    </widget>
+   <widget class="QPushButton" name="askButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>220</y>
+      <width>81</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Ask Question</string>
+    </property>
+    <property name="autoDefault">
+     <bool>true</bool>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -154,6 +170,7 @@
   <tabstop>Temail</tabstop>
   <tabstop>Tques</tabstop>
   <tabstop>Tans</tabstop>
+  <tabstop>askButton</tabstop>
   <tabstop>verifyButton</tabstop>
  </tabstops>
  <resources/>

@@ -20,22 +20,25 @@ data_client = pymongo.MongoClient("mongodb://localhost/")
 ds_db = data_client["dataseed_db"]
 ds_user = ds_db["user"]
 
+
 # x = ds_user.insert_one({_id:123,"fullname":"DataSeed User","username":"ds", "password":"ds"})
-curr_user = ds_user.find_one()
-list(curr_user)
+curr_db_user = ds_db["curr_user"]
+cu = curr_db_user.find_one({})
+# list(curr_user)
 # print(curr_user['username'])
 # print(curr_user['password'])
 
 
-
 def loginpressed():
-    if(login.TUname.text()== curr_user["username"] and login.Tpass.text() == curr_user["password"]):
-        #login.Lerror.setText("Redirect page is not added")
-        # SAAD DB
-        login.hide()
-        os.system('python mainpage.py')
-    else:
-        login.Lerror.setText("Invalid Username or password")
+    curr_user = ds_user.find_one({"username": self.TUname.text(), "password": self.Tpass.text()})
+        if (list(curr_user) == []):
+            self.Lerror.setText("The username/password is incorrect. Please try again.")
+            pass
+        else:
+            x = curr_db_user.insert_one({curr_user['_id']}) # Saving the unique logged in ID
+            # SAAD DB DONE
+            os.system('python mainpage.py')
+            pass
 
        
 def signuppressed():
@@ -46,20 +49,37 @@ def forgetpressed():
     forgetwindow.show()
 
 def verifyinfo():
+    
+#     curr_user_ques = ds_user.find_one({"_id":curr_user_id},{"security_question":1, "_id":0})["security_question"]
+
+#     curr_user_ans = ds_user.find_one({"_id":curr_user_id},{"security_answer":1, "_id":0})["security_answer"]
     if (forgetwindow.Tques.text()==forgetwindow.Tans.text()):
-        # SAAD DB
+        # SAAD DB COMMENTED
         sendmail(forgetwindow.Temail.text(),1)
         
-        time.sleep(5)
-        forgetwindow.hide()
+        #time.sleep(5)
+        #forgetwindow.hide()
+def setquestion():
+    if not forgetwindow.Temail.text:
+        forgetwindow.Lerror.setText("Enter email address")
+        ###SAAD DB
+    # check kro forgetwindow.Temail.text koi valid email return krna rha h??
+    ##yes then forgetwindow.Tques.setText(question) else: forgetwindow.Lerror.setText("No email address found")
+    ##question->db se ae ga  
+
 
 def sendmail(emailid,flag):
     if (flag==1):
         
         fromaddr="pashaafrozsyed@gmail.com"
         toaddr = emailid
+        
+        # SAAD DB COMMENTED
+        #curr_user = ds_user.find_one({"email":emailid}, {"password":1, "_id":0})
+        #forgot_password = curr_user['password']
+        
         msgg = "Your Password is: if you havn't request for password reset kindly ignore this mail"
-        # SAAD DB
+        
         subj = "Password Reset Mail"
 
         message = MIMEMultipart()
@@ -129,7 +149,9 @@ def registerpressed():
         elif(signup.Tans.text()==""):
             signup.Lerror.setText("Answer is required")    
         else:
-            # SAAD DB
+            #            z=ds_user.insert_one({"username":signup.TUname.text(), "password":signup.Tpass.text(), "phone" : "+923312042409", "email": signup.Temail.text(), "full_name" : "Soman Maqai", "address" : "House 1234 Model Colony Karachi Pakistan", "category": signup.Toccu.text(), "organization":signup.Torg.text(), "security_question":signup.Tques.text(), "security_answer":signup.Tans.text()})
+            # SAAD DB DONE
+
             sendmail(signup.Temail.text(),2)
             signup.Lerror.setText("Register Successfull")
 
@@ -150,6 +172,7 @@ if __name__ == "__main__":
     login.forgetButton.clicked.connect(forgetpressed)
     signup.RegisterButton.clicked.connect(registerpressed)
     forgetwindow.verifyButton.clicked.connect(verifyinfo)
+    forgetwindow.askButton.clicked.connect(setquestion)
     login.Tpass.returnPressed.connect(login.loginButton.click)
     login.show()
     app.exec()
