@@ -84,6 +84,16 @@
      </rect>
     </property>
    </widget>
+   <widget class="QLineEdit" name="exp">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>440</y>
+      <width>271</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
@@ -252,31 +262,6 @@
     </property>
     <property name="text">
      <string>Proceed</string>
-    </property>
-   </widget>
-   <widget class="QDateEdit" name="dateEdit">
-    <property name="geometry">
-     <rect>
-      <x>320</x>
-      <y>440</y>
-      <width>271</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="dateTime">
-     <datetime>
-      <hour>0</hour>
-      <minute>0</minute>
-      <second>0</second>
-      <year>2019</year>
-      <month>5</month>
-      <day>12</day>
-     </datetime>
     </property>
    </widget>
   </widget>
