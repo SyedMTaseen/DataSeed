@@ -30,15 +30,15 @@ cu = curr_db_user.find_one({})
 
 
 def loginpressed():
-    curr_user = ds_user.find_one({"username": self.TUname.text(), "password": self.Tpass.text()})
-        if (list(curr_user) == []):
-            self.Lerror.setText("The username/password is incorrect. Please try again.")
-            pass
-        else:
-            x = curr_db_user.insert_one({curr_user['_id']}) # Saving the unique logged in ID
-            # SAAD DB DONE
-            os.system('python mainpage.py')
-            pass
+    curr_user = ds_user.find_one({"username": login.TUname.text(), "password": login.Tpass.text()})
+    if (list(curr_user) == []):
+        login.Lerror.setText("The username/password is incorrect. Please try again.")
+        pass
+    else:
+        x = curr_db_user.insert_one({curr_user['_id']}) # Saving the unique logged in ID
+        # SAAD DB DONE
+        os.system('python mainpage.py')
+        pass
 
        
 def signuppressed():

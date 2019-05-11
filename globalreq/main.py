@@ -14,9 +14,9 @@ requested_data = ds_db["requested_data"]
 deleted_request = ds_db["deleted_request"]
 cu = curr_ds_user.find_one({})["_id"]
 
- pg1 = uic.loadUi("./globalreq/QAA.ui")
- popup = uic.loadUi("./globalreq/addrequest.ui")
- mainpg = uic.loadUi("./globalreq/Requestpg.ui")
+pg1 = uic.loadUi("./globalreq/QAA.ui")
+popup = uic.loadUi("./globalreq/addrequest.ui")
+mainpg = uic.loadUi("./globalreq/Requestpg.ui")
 # pg1 = uic.loadUi("QAA.ui")
 # popup = uic.loadUi("addrequest.ui")
 # mainpg = uic.loadUi("Requestpg.ui")
@@ -146,7 +146,7 @@ def itemclicked(iteem):
     pg1.Ltitle.setText(request['title'])
     pg1.desbox.setText(request['description'])
     
-    for k in comments_of_request::
+    for k in comments_of_request:
         pg1.textEdit = QtWidgets.QTextEdit(pg1.centralwidget)
         pg1.textEdit.setGeometry(QtCore.QRect(10, 390, 721, 71))
 
