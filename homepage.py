@@ -62,6 +62,18 @@ class PaymentWindow(QtWidgets.QMainWindow, Ui_MainWindow_pay):
         QtWidgets.QMainWindow.__init__(self)
         Ui_MainWindow.__init__(self)
         self.setupUi(self)
+        
+qtCreatorFile_prep = "preparedata.ui"  # Enter file here.
+
+Ui_MainWindow_prep, QtBaseClass = uic.loadUiType(qtCreatorFile_prep)
+
+
+class PrepWindow(QtWidgets.QMainWindow, Ui_MainWindow_prep):
+    def __init__(self):
+        QtWidgets.QMainWindow.__init__(self)
+        Ui_MainWindow.__init__(self)
+        self.setupUi(self)
+       
 
 # In[ ]:
 
@@ -73,6 +85,7 @@ Ui_MainWindow, QtBaseClass = uic.loadUiType(qtCreatorFile)
 
 filterItem = ['All item', 'Medical', 'Movies', 'General']
 path = 0
+cleandf = 0
 
 # dummy_dataset = [{
 #     "uploaded_by": 123,
@@ -109,6 +122,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.purchase_window = uic.loadUi("purchase_window.ui")
         self.searchBox.returnPressed.connect(self.clickme.click)
         self.payment_window = uic.loadUi("payment.ui")
+        self.prep_window = uic.loadUi("preparedata.ui")
 
     def itemclicked(self, iteem):
         print("item clicked: ", iteem)
@@ -148,6 +162,42 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.purchase_window.paybtn.clicked.connect(
             self.paypage)
         path = item_list[item_index]["data_location"]
+        self.purchase_window.preparebtn.clicked.connect(
+            self.prepare)
+
+    def prepare(self):
+        global path
+        global cleandf
+        cleandf = pd.read_csv(path)
+
+        self.prep_window.show()
+        self.purchase_window.hide()
+        self.prep_window.viewprepbtn.clicked.connect(
+            self.cleanViewData)
+        self.prep_window.outbtn.clicked.connect(
+            self.outlier)
+        self.prep_window.missbtn.clicked.connect(
+            self.missing)
+
+        self.prep_window.cleanpaybtn.clicked.connect(
+            self.paypage)
+
+    def outlier(self):
+        global cleandf
+        for col in list(cleandf.columns):
+            df_sorted = sorted(cleandf[col])
+            q1, q3 = np.percentile(cleandf[col], [25, 75])
+            iqr = q3-q1
+            lower = q1 - (1.5*iqr)
+            upper = q3 - (1.5*iqr)
+            cleandf.drop(cleandf[cleandf[col] < lower &
+                                 cleandf[col] > upper].index, inplace=True)
+
+    def missing(self):
+        global cleandf
+        for col in list(cleandf.columns):
+            cleandf[col] = cleandf[col].fillna(0)
+        
 
     def paypage(self):
         global pay_obj
@@ -174,6 +224,13 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         print(path)
         df = pd.read_csv(path)
         dfgui.show(df.head(10))
+
+    def cleanViewData(self):
+        global cleandf
+        # global path
+        # print(path)
+        # df = pd.read_csv(path)
+        dfgui.show(cleandf.head(10))
 
     def Search_Query(self, query):
         search_list = []
