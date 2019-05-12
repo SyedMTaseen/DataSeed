@@ -34,6 +34,8 @@ def CalculateTax4():
     popup.show()
 def CalculateTax5():
     os.system('python ./individualreq/main.py')
+def CalculateTax6():
+    os.system('python LoginV1.py')
 
 def renderpurchaselist():
     
@@ -50,7 +52,7 @@ def renderpurchaselist():
 
             label = QLabel(str(i+1)+ ") Title:" + i['title'] + "\n" + "     Request By: " + i['Requested By']+"\n" +"     Rating: " + str(i['rating']) + "/5")
             label.setStyleSheet("height:fit-content;font-size:12pt;font-family: Segoe UI;font-style: normal;font-weight:100")
-            label.setWordWrap(True);
+            label.setWordWrap(True)
             
             label2 = QLabel("No of comments " + i['No of comment'] + '\nStatus: ' + i['status'])
             label2.setStyleSheet("height:fit-content;font-size:12pt;font-family: Segoe UI;text-align:right")
@@ -260,6 +262,7 @@ if __name__ == "__main__":
     mpg.sell_btn.clicked.connect(CalculateTax2)
     mpg.view_req_btn.clicked.connect(CalculateTax3)
     mpg.post_req_btn.clicked.connect(CalculateTax4)
+    mpg.logout_btn.clicked.connect(CalculateTax4)
     #mpg.deletereq.clicked.connect(deleterequest)
     # mpg.listWidget_3.itemDoubleClicked.connect(itemclicked)   // pasha lagai ga on list widget 2 
     popup.saveButton.clicked.connect(savereq)
