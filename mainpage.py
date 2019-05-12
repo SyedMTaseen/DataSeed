@@ -35,6 +35,7 @@ def CalculateTax4():
 def CalculateTax5():
     os.system('python ./individualreq/main.py')
 def CalculateTax6():
+    mpg.hide()
     os.system('python LoginV1.py')
 
 def renderpurchaselist():
@@ -262,7 +263,7 @@ if __name__ == "__main__":
     mpg.sell_btn.clicked.connect(CalculateTax2)
     mpg.view_req_btn.clicked.connect(CalculateTax3)
     mpg.post_req_btn.clicked.connect(CalculateTax4)
-    mpg.logout_btn.clicked.connect(CalculateTax4)
+    mpg.logout_btn.clicked.connect(CalculateTax6)
     #mpg.deletereq.clicked.connect(deleterequest)
     # mpg.listWidget_3.itemDoubleClicked.connect(itemclicked)   // pasha lagai ga on list widget 2 
     popup.saveButton.clicked.connect(savereq)
