@@ -8,9 +8,11 @@ import datetime
 
 data_client = pymongo.MongoClient("mongodb://localhost/")
 ds_db = data_client["dataseed_db"]
+ds_user = ds_db["user"]
 ds_db_user = ds_db["curr_user"]
-cu = ds_db_user.find({})["_id"]
-
+cu = ds_db_user.find_one({})["_id"]
+requested_data = ds_db["requested_data"]
+deleted_dataset = ds_db["deleted_dataset"]
 ds_datasets = ds_db["dataset"]
 
 app = QtWidgets.QApplication([])
@@ -164,7 +166,7 @@ def deleterecord():
         i=0;
         while i<5:
             if(mpg.listWidget_2.item(i)== mpg.listWidget_2.currentItem()):
-                index=i
+                #index=i
                 break
             i=i+1
 
@@ -185,10 +187,18 @@ def yespressed():
         
     elif flag==2:
         mpg.listWidget.takeItem(index)
+
+        this_dataset = mydic_list[index]
+        y = deleted_dataset.insert(this_dataset)
+        x = ds_datasets.remove({"_id": request["_id"]})
+
+
+
         ### SAAD DB ? delete kr do data jo user ko sell kr na h 
         ###delete from DB also!!!.....foran hone zarori h wrna index ma msle ajen gy
         #mydic_list.pop(i)
         #renderlist()
+
 
 def nopressed():
     dialog.hide()
@@ -235,7 +245,7 @@ def savereq():
         popup.Lerror.setText("Enter atleast 10 words")
     else:
         #SAAD DB DONE COMMENTED BUT SPECIFY THE FIELDS PLEASE
-        q = requested_data.insert({"title": popup.Ttitle.toPlainText(), "description": popup.desbox.toPlainText(), "requested_by":cu,"requested_on": datetime.datetime.now(),"status":"Pending"})
+        q = requested_data.insert({"title": popup.Ttitle.toPlainText(), "description": popup.desbox.toPlainText(), "requested_by":cu,"requested_on": datetime.datetime.now(),"status":"Pending","comments":[]})
         # insert all info regarding the new requested data
         pg1.Ltitle.setText(popup.Ttitle.toPlainText())
         pg1.desbox.setText(popup.desbox.toPlainText())
@@ -245,7 +255,7 @@ if __name__ == "__main__":
 #   mydic_list = list(ds_datasets.find({"bought_by": cu}))
     mydic_list = list(ds_datasets.find({}))
 
-    mydic_list1= ds_user.find_one({"username":cu}, {"search_history":1,"_id":0})["search_history"]
+    mydic_list1= ds_user.find_one({"_id":cu}, {"search_history":1,"_id":0})["search_history"]
     mpg.purchase_btn.clicked.connect(CalculateTax)
     mpg.sell_btn.clicked.connect(CalculateTax2)
     mpg.view_req_btn.clicked.connect(CalculateTax3)
@@ -253,7 +263,7 @@ if __name__ == "__main__":
     #mpg.deletereq.clicked.connect(deleterequest)
     # mpg.listWidget_3.itemDoubleClicked.connect(itemclicked)   // pasha lagai ga on list widget 2 
     popup.saveButton.clicked.connect(savereq)
-    mpg.deleterecord.clicked.connect(deleterecord)
+    #mpg.deleterecord.clicked.connect(deleterecord)
     mpg.deletedata.clicked.connect(deletedata)
     mpg.myreqButton.clicked.connect(CalculateTax5)
     dialog.yesButton.clicked.connect(yespressed)

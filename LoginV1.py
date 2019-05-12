@@ -31,11 +31,16 @@ cu = curr_db_user.find_one({})
 
 def loginpressed():
     curr_user = ds_user.find_one({"username": login.TUname.text(), "password": login.Tpass.text()})
+    print(login.TUname.text())
+    print(curr_user)
+    print(login.Tpass.text())
+
     if (list(curr_user) == []):
         login.Lerror.setText("The username/password is incorrect. Please try again.")
         pass
     else:
-        x = curr_db_user.insert_one({curr_user['_id']}) # Saving the unique logged in ID
+        x = curr_db_user.insert({"_id": curr_user['_id']}) # Saving the unique logged in ID
+        # y = curr_db_user.remove({}) # Deleting the unique logged in ID at sign out
         # SAAD DB DONE
         os.system('python mainpage.py')
         pass
@@ -75,10 +80,10 @@ def sendmail(emailid,flag):
         toaddr = emailid
         
         # SAAD DB COMMENTED
-        #curr_user = ds_user.find_one({"email":emailid}, {"password":1, "_id":0})
-        #forgot_password = curr_user['password']
+        curr_user = ds_user.find_one({"email":emailid}, {"password":1, "_id":0})
+        forgot_password = curr_user['password']
         
-        msgg = "Your Password is: if you havn't request for password reset kindly ignore this mail"
+        msgg = "Your Password is:"+forget_password+" if you havn't request for password reset kindly ignore this mail"
         
         subj = "Password Reset Mail"
 
@@ -149,7 +154,7 @@ def registerpressed():
         elif(signup.Tans.text()==""):
             signup.Lerror.setText("Answer is required")    
         else:
-            #            z=ds_user.insert_one({"username":signup.TUname.text(), "password":signup.Tpass.text(), "phone" : "+923312042409", "email": signup.Temail.text(), "full_name" : "Soman Maqai", "address" : "House 1234 Model Colony Karachi Pakistan", "category": signup.Toccu.text(), "organization":signup.Torg.text(), "security_question":signup.Tques.text(), "security_answer":signup.Tans.text()})
+            z=ds_user.insert_one({"username":signup.TUname.text(), "password":signup.Tpass.text(), "phone" : "+923312042409", "email": signup.Temail.text(), "full_name" : "Soman Maqai", "address" : "House 1234 Model Colony Karachi Pakistan", "category": signup.Toccu.text(), "organization":signup.Torg.text(), "security_question":signup.Tques.text(), "security_answer":signup.Tans.text()})
             # SAAD DB DONE
 
             sendmail(signup.Temail.text(),2)

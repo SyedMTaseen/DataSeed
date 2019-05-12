@@ -4,7 +4,7 @@ from PyQt5.QtWidgets import *
 import ctypes
 app = QtWidgets.QApplication([])
 import pymongo
-
+ 
 data_client = pymongo.MongoClient("mongodb://localhost/")
 ds_db = data_client["dataseed_db"]
 ds_user = ds_db["user"]
@@ -22,9 +22,12 @@ pg2 = uic.loadUi("./individualreq/myrequest.ui")
 dialog=uic.loadUi("./individualreq/Lwarning box.ui")
 
 def itemclicked(iteem):
+    global index 
     i=0;
     while i<5:
         if(pg2.listWidget.item(i)== iteem):
+            index=i
+
             break
         i=i+1
     pg2.hide()
@@ -46,7 +49,7 @@ def itemclicked(iteem):
     
     # STATUS: True or false = "Fulfilled" or "Pending"
     # Accessing status of the current request:
-    # request["status"]
+    # if (request["status"]=='Fulfilled'):
     
     pg1.Ltitle.setText(request['title'])
     pg1.desbox.setText(request['description'])
@@ -62,10 +65,9 @@ def itemclicked(iteem):
         pg1.label_3.setMinimumHeight(24)
         pg1.label_3.setMaximumHeight(28)
         
-        # Comment: k["comment"]
-        
-        pg1.label_3.setText("Commented by:" ds_user.find_one({"_id": k["commented_by"]})["username"])
-        pg1.textEdit.setText(k)
+             
+        pg1.label_3.setText("Commented by:", ds_user.find_one({"_id": k["commented_by"]})["username"])
+        pg1.textEdit.setText(k["comment"])
         #pg1.layout.addWidget(pg1.label_3)
 
         #pg1.layout.addWidget(pg1.textEdit)
@@ -78,23 +80,26 @@ def changestatus():
     ###check author h toh show kr do
     
     # Updates status of the ith request to "Fulfilled"
-    # x = requested_data.update({"_id": mydic_list[i]["_id"]}, {$set: {"status":"Fulfilled"}})
+    global index
+    x = requested_data.update({"_id": mydic_list[index]["_id"]}, {'$set': {"status":"Fulfilled"}})
     
     print("Simply DB se value modify krni h")
     pg1.Bresolve.hide()
     
 def renderlist():
+
     for i in range(len(mydic_list)):
+        print(mydic_list[i])
         layout = QHBoxLayout()
         layout.setSizeConstraint(QLayout.SetMinimumSize)
         
         item = QListWidgetItem(pg2.listWidget)
         ####SAAD DB currently login user keh comment dikhao
-        label = QLabel(str(i+1)+ ") Title:" + mydic_list[i]['title'] + "\n" + "     Request By: " + mydic_list[i]['Requested By'])
+        label = QLabel(str(i+1)+ ") Title:" + mydic_list[i]['title'] + "\n" + "     Request By: " + ds_user.find_one({"_id": mydic_list[i]['requested_by']})["username"])
         label.setStyleSheet("height:fit-content;font-size:12pt;font-family: Segoe UI;font-style: normal;font-weight:100")
         label.setWordWrap(True);
         
-        label2 = QLabel("No of comments " + mydic_list[i]['No of comment'] + '\nStatus: ' + mydic_list[i]['status'])
+        label2 = QLabel("No of comments " + str(len(mydic_list[i]['comments'])) + '\nStatus: ' + mydic_list[i]['status'])
         label2.setStyleSheet("height:fit-content;font-size:12pt;font-family: Segoe UI;text-align:right")
         label2.setAlignment(QtCore.Qt.AlignCenter)
         label2.setWordWrap(True)
@@ -142,11 +147,11 @@ def yespressed():
     pg2.listWidget.takeItem(index)
     
     # Delete current request directly from database
-    # y = deleted_request.insert(mydic_list[i])
-    # x = requested_data.remove_one({"_id": mydic_list[i]["_id"]})
+    y = deleted_request.insert(mydic_list[index])
+    x = requested_data.remove_one({"_id": mydic_list[index]["_id"]})
     
     # Delete current request from provided mydic_list
-    # mydic_list.pop(i)
+    mydic_list.pop(index)
     
     #renderlist()
     
