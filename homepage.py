@@ -63,19 +63,6 @@ class PaymentWindow(QtWidgets.QMainWindow, Ui_MainWindow_pay):
         Ui_MainWindow.__init__(self)
         self.setupUi(self)
 
-
-qtCreatorFile_prep = "preparedata.ui"  # Enter file here.
-
-Ui_MainWindow_prep, QtBaseClass = uic.loadUiType(qtCreatorFile_prep)
-
-
-class PrepWindow(QtWidgets.QMainWindow, Ui_MainWindow_prep):
-    def __init__(self):
-        QtWidgets.QMainWindow.__init__(self)
-        Ui_MainWindow.__init__(self)
-        self.setupUi(self)
-
-
 # In[ ]:
 
 
@@ -122,7 +109,6 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.purchase_window = uic.loadUi("purchase_window.ui")
         self.searchBox.returnPressed.connect(self.clickme.click)
         self.payment_window = uic.loadUi("payment.ui")
-        self.prep_window = uic.loadUi("preparedata.ui")
 
     def itemclicked(self, iteem):
         print("item clicked: ", iteem)
@@ -141,14 +127,12 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def PurchaseWindowOpen(self, item_index):
         global path
-
         print(item_list[item_index])
         global pay_obj
         pay_obj = item_list[item_index]
         self.purchase_window.show()
         self.purchase_window.descr.setText(
             item_list[item_index]['full_description'])
-        path = item_list[item_index]["data_location"]
         self.purchase_window.cost.setText(item_list[item_index]['cost'])
         self.purchase_window.size.setText(item_list[item_index]['data_size'])
         self.purchase_window.status.setText(item_list[item_index]['status'])
@@ -159,44 +143,11 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             str(item_list[item_index]['rating']))
         self.purchase_window.title.setText(
             item_list[item_index]['short_description'])
-        df = pd.read_csv(path)
         self.purchase_window.viewdatabtn.clicked.connect(
             self.viewdata)
         self.purchase_window.paybtn.clicked.connect(
             self.paypage)
-        self.purchase_window.preparebtn.clicked.connect(
-            self.prepare)
-
-    def prepare(self):
-        global path
-        global cleandf
-        cleandf = pd.read_csv(path)
-
-        self.prep_window.show()
-        self.purchase_window.hide()
-        self.prep_window.viewprepbtn.clicked.connect(
-            self.viewdata)
-        self.prep_window.outbtn.clicked.connect(
-            self.outlier)
-        self.prep_window.missbtn.clicked.connect(
-            self.missing)
-
-        self.prep_window.cleanpaybtn.clicked.connect(
-            self.paypage)
-
-    def outlier(self, cleandf):
-        for col in list(cleandf.columns):
-            df_sorted = sorted(cleandf[col])
-            q1, q3 = np.percentile(cleandf[col], [25, 75])
-            iqr = q3-q1
-            lower = q1 - (1.5*iqr)
-            upper = q3 - (1.5*iqr)
-            cleandf.drop(cleandf[cleandf[col] < lower &
-                                 cleandf[col] > upper].index, inplace=True)
-
-    def missing(self, cleandf):
-        for col in list(cleandf.columns):
-            cleandf[col] = cleandf[col].fillna(cleandf[col].mean())
+        path = item_list[item_index]["data_location"]
 
     def paypage(self):
         global pay_obj
@@ -220,9 +171,9 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def viewdata(self):
         global path
+        print(path)
         df = pd.read_csv(path)
-
-        dfgui.show(df)
+        dfgui.show(df.head(10))
 
     def Search_Query(self, query):
         search_list = []
@@ -301,7 +252,6 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
 #             for item in dummy_dataset:
 #                 for key,value in item.items():
 #                     strr += key + ' ' + str(value) + '\n'
-
 
     def selectionchange(self, i):
         global original_list_item
