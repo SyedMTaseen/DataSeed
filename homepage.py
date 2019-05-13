@@ -21,12 +21,17 @@ import easygui
 
 
 item_list = list()
+uploaded_by = 0
 
 
 data_client = pymongo.MongoClient("mongodb://localhost/")
 ds_db = data_client["dataseed_db"]
 ds_user = ds_db["user"]
 ds_datasets = ds_db["dataset"]
+dataseed_earning = ds_db["dataseed_earning"]
+ds_curr_user = ds_db["curr_user"]
+
+cu = ds_curr_user.find_one({})["_id"]
 # curr_datasets = ds_datasets.find_many()
 
 for x in ds_datasets.find():
@@ -142,6 +147,10 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def PurchaseWindowOpen(self, item_index):
         global path
+        global cleandf
+        global uploaded_by
+        
+        uploaded_by = item_list[item_index]['uploaded_by']
         print(item_list[item_index])
         global pay_obj
         pay_obj = item_list[item_index]
@@ -165,6 +174,8 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         path = item_list[item_index]["data_location"]
         self.purchase_window.preparebtn.clicked.connect(
             self.prepare)
+        cleandf = pd.read_csv(path)
+    
 
     def prepare(self):
         global path
@@ -219,12 +230,19 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
     def proceed(self):
         global pay_obj
         global cleandf
+        global uploaded_by
+        global cleandf
+
+        comm = int(pay_obj['cost'])*5
+        comm = comm/100
+
         cardnum = self.payment_window.cardnum.text()
-        exp = self.payment_window.exp.text()
-        print(exp)
-        print(cardnum)
+       
         exppath = easygui.diropenbox()
         exppath.replace('//', '\\\\')
+        exppath = exppath + '\\exportedfile.csv'    
+
+        x = dataseed_earning.insert({"total_amount": float(pay_obj['cost'])+comm, "seller": uploaded_by, "buyer": cu, "commissioned_on":datetime.datetime.now()})
         export_csv = cleandf.to_csv (exppath, index = None, header=True)
 
     def viewdata(self):
