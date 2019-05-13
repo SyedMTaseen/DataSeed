@@ -36,6 +36,7 @@ def CalculateTax5():
     os.system('python ./individualreq/main.py')
 def CalculateTax6():
     mpg.hide()
+    z = ds_db_user.remove({})
     os.system('python LoginV1.py')
 
 def renderpurchaselist():
@@ -50,12 +51,19 @@ def renderpurchaselist():
             
             item = QListWidgetItem(mpg.listWidget_3)
             # SAAD DB DONE COMMENTED
+            print(i["short_description"])
+            print(i)
 
-            label = QLabel(str(i+1)+ ") Title:" + i['title'] + "\n" + "     Request By: " + i['Requested By']+"\n" +"     Rating: " + str(i['rating']) + "/5")
+            label = QLabel(str(i+1) + ") Title: " + i['short_description'] + "\n" + "Uploaded By: " + str(i['uploaded_by']) + "\n" + "Rating: " + str(i['rating']) + "/5")
+
+            # label = QLabel(str(i+1)+ ") Title:" + i['short_description'] + "\n" + "     Request By: " + i['requested_by'] +"\n" +"     Rating: " + str(i['rating']) + "/5")
             label.setStyleSheet("height:fit-content;font-size:12pt;font-family: Segoe UI;font-style: normal;font-weight:100")
             label.setWordWrap(True)
             
-            label2 = QLabel("No of comments " + i['No of comment'] + '\nStatus: ' + i['status'])
+            # label2 = QLabel("No of comments " + str(len(i['comments'])) + '\nStatus: ' + i['status'])
+
+            label2 = QLabel(
+            "Data Size: " + i['data_size'] + '\nStatus: ' + i['status'])
             label2.setStyleSheet("height:fit-content;font-size:12pt;font-family: Segoe UI;text-align:right")
             label2.setAlignment(QtCore.Qt.AlignCenter)
             label2.setWordWrap(True)
@@ -63,7 +71,7 @@ def renderpurchaselist():
             
 
             layout.addWidget(label)
-            layout.addWidget(label2)
+            # layout.addWidget(label2)
             
             widget = QWidget()
             widget.setStyleSheet("height:fit-content;width:100%");
@@ -84,14 +92,21 @@ def renderselllist():
 #    for i in range(len(mydic_list)):
             layout = QHBoxLayout()
             layout.setSizeConstraint(QLayout.SetMinimumSize)
+            print(i["short_description"])
+            print(i)
             
             item = QListWidgetItem(mpg.listWidget_3)
             # SAAD DB DONE COMMENTED
-            label = QLabel(str(i+1)+ ") Title:" + i['title'] + "\n" + "     Request By: " + i['Requested By']+ "\n" +"Rating: " + str(i['rating']) + "/5")
+            label = QLabel(str(i+1) + ") Title: " + i['short_description'] + "\n" + "Uploaded By: " + str(i['uploaded_by']) + "\n" + "Rating: " + str(i['rating']) + "/5")
+
+            # label = QLabel(str(i+1)+ ") Title:" + i['short_description'] + "\n" + "     Request By: " + i['requested_by'] +"\n" +"     Rating: " + str(i['rating']) + "/5")
             label.setStyleSheet("height:fit-content;font-size:12pt;font-family: Segoe UI;font-style: normal;font-weight:100")
-            label.setWordWrap(True);
+            label.setWordWrap(True)
             
-            label2 = QLabel("No of comments " + i['No of comment'] + '\nStatus: ' + i['status'])
+            # label2 = QLabel("No of comments " + str(len(i['comments'])) + '\nStatus: ' + i['status'])
+
+            label2 = QLabel(
+            "Data Size: " + i['data_size'] + '\nStatus: ' + i['status'])
             label2.setStyleSheet("height:fit-content;font-size:12pt;font-family: Segoe UI;text-align:right")
             label2.setAlignment(QtCore.Qt.AlignCenter)
             label2.setWordWrap(True)
@@ -274,7 +289,8 @@ if __name__ == "__main__":
     dialog.noButton.clicked.connect(nopressed)
 
     mpg.show()
-    renderpurchaselist()
+    #renderpurchaselist()
     rendersearchlist()
+    #renderselllist()
     app.exec()
 

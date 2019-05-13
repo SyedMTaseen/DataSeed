@@ -72,9 +72,10 @@ def savecmnt():
         pg1.saveButton.hide()
         ##SAAD DB PENDING
         pg1.textEdit.setReadOnly(True)
+
+        y = requested_data.update({"_id": ""}, {'$push': {"comments": {"commented_by": ds_user.find_one({"_id": cu})["username"], "comment": pg1.textEdit.toPlainText()}}})
         
-        # y = requested_data.update({}) with cu and comment text
-        # jo user logged in, jo requested_data hai, us pe comment add hoga ussi user ke naam se
+        
 
 def renderlist():
     for i in range(len(mydic_list)):
@@ -141,7 +142,9 @@ def itemclicked(iteem):
     
     # STATUS: True or false = "Fulfilled" or "Pending"
     # Accessing status of the current request:
-    # request["status"]
+    pg1.label.setText("Requested By: " + ds_user.find_one({"_id": request["username"]}))
+    pg1.Lstatus.setText(request["status"])
+    print(request["status"])
 
 
     pg1.Ltitle.setText(request['title'])

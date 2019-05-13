@@ -18,6 +18,9 @@ ds_user = ds_db["user"]
 curr_user = ds_user.find_one()
 # print(curr_user['_id'])
 ds_dataset = ds_db["dataset"]
+ds_db_user = ds_db["curr_user"]
+cu = ds_db_user.find_one({})["_id"]
+
 # In[2]:
 
 
@@ -61,7 +64,7 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         else:
             self.status_field.setText("Successfully Submited!")
             curr_dataset = {
-                "uploaded_by": curr_user["_id"],
+                "uploaded_by": cu,
                 "full_description": str2,
                 "category": self.category_field.currentText(),
                 "short_description": str1,
@@ -70,7 +73,8 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
                 "status": "For Sale",
                 "cost": str4,
                 "uploaded_on_date_time": datetime.datetime.now(),
-                "rating": 0}
+                "rating": 0,
+                "bought_by": ""}
             ds_dataset.insert_one(curr_dataset)
             self.status_field.setText("Successfully Submited!")
 

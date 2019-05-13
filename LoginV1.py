@@ -42,6 +42,7 @@ def loginpressed():
         x = curr_db_user.insert({"_id": curr_user['_id']}) # Saving the unique logged in ID
         # y = curr_db_user.remove({}) # Deleting the unique logged in ID at sign out
         # SAAD DB DONE
+        login.hide()
         os.system('python mainpage.py')
         pass
 
