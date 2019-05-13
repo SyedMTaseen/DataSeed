@@ -14,6 +14,7 @@ import datetime
 import pandas as pd
 import numpy as np
 import dfgui
+import easygui
 
 
 # In[2]:
@@ -183,6 +184,8 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             self.paypage)
 
     def outlier(self):
+        self.prep_window.outst.setText("Outliers Treated")
+
         global cleandf
         for col in list(cleandf.columns):
             df_sorted = sorted(cleandf[col])
@@ -190,10 +193,10 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
             iqr = q3-q1
             lower = q1 - (1.5*iqr)
             upper = q3 - (1.5*iqr)
-            cleandf.drop(cleandf[cleandf[col] < lower &
-                                 cleandf[col] > upper].index, inplace=True)
+            #cleandf.drop(cleandf[cleandf[col] < lower & cleandf[col] > upper].index, inplace=True)
 
     def missing(self):
+        self.prep_window.outst.setText("Missing Values Replaced")
         global cleandf
         for col in list(cleandf.columns):
             cleandf[col] = cleandf[col].fillna(0)
@@ -212,12 +215,17 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.payment_window.proceedbtn.clicked.connect(
             self.proceed)
 
+
     def proceed(self):
         global pay_obj
+        global cleandf
         cardnum = self.payment_window.cardnum.text()
         exp = self.payment_window.exp.text()
         print(exp)
         print(cardnum)
+        exppath = easygui.diropenbox()
+        exppath.replace('//', '\\\\')
+        export_csv = cleandf.to_csv (exppath, index = None, header=True)
 
     def viewdata(self):
         global path
