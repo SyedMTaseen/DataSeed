@@ -187,16 +187,16 @@ class MyApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.prep_window.outst.setText("Outliers Treated")
 
         global cleandf
-        for col in list(cleandf.columns):
-            df_sorted = sorted(cleandf[col])
-            q1, q3 = np.percentile(cleandf[col], [25, 75])
-            iqr = q3-q1
-            lower = q1 - (1.5*iqr)
-            upper = q3 - (1.5*iqr)
+        #for col in list(cleandf.columns):
+            #df_sorted = sorted(cleandf[col])
+            #q1, q3 = np.percentile(cleandf[col], [25, 75])
+            #iqr = q3-q1
+            #lower = q1 - (1.5*iqr)
+            #upper = q3 - (1.5*iqr)
             #cleandf.drop(cleandf[cleandf[col] < lower & cleandf[col] > upper].index, inplace=True)
 
     def missing(self):
-        self.prep_window.outst.setText("Missing Values Replaced")
+        self.prep_window.missst.setText("Missing Values Replaced")
         global cleandf
         for col in list(cleandf.columns):
             cleandf[col] = cleandf[col].fillna(0)
